@@ -55,4 +55,7 @@ Rails.application.routes.draw do
   #   end
 
    root 'home#index'
+
+   resources :users
+
 end
