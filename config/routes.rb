@@ -54,8 +54,22 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-   root 'home#index'
+ 
 
-   resources :users
+  root :to=>'home#index'
+  
+
+
+  namespace :api, defaults: {format: :json} do
+    resources :users
+  end
+
+  get '*path'=>'home#index'
+
+  
+  
+  
+
+
 
 end
