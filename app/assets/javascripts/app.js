@@ -7,7 +7,7 @@ app.config(['$routeProvider', '$locationProvider',
             templateUrl: 'index.html',
             controller: 'UserCtrl'
         }).when('/users/:userId', {
-            templateUrl: 'users.html',
+            templateUrl: 'user.html',
             controller: 'UserCtrl'
         });
 
@@ -19,23 +19,6 @@ app.config(['$routeProvider', '$locationProvider',
     }
 ]);
 
-controllers = angular.module('controllers', []);
-controllers.controller("UserCtrl", ['$scope', '$routeParams', '$resource',
-function($scope, $routeParams, $resource) {
-    User = $resource(/*'http://rest-service.guides.spring.io/greeting'*/'/api/users/:userId', {
-        userId: "@id"
-    });
-    
-    User.get({userId:$routeParams.userId}).$promise.then(function(result){
-        $scope.user=users;
-    });
-
-    
-    
-}]);
 
 
-var users = {
-    id: 1,
-    name: 'Abhay'
-};
+
