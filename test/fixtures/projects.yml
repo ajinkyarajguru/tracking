@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  projected_revenue: MyString
+  : 1
+  progress: MyString
+  string: MyString
+  start_on: MyString
+  : 2015-02-05
+  planned_end: MyString
+  : 2015-02-05
+  completed_on: MyString
+  : 2015-02-05
+  references: MyString
+  : 
+  references: MyString
+  : 
+  references: MyString
+  : 
+
+two:
+  projected_revenue: MyString
+  : 1
+  progress: MyString
+  string: MyString
+  start_on: MyString
+  : 2015-02-05
+  planned_end: MyString
+  : 2015-02-05
+  completed_on: MyString
+  : 2015-02-05
+  references: MyString
+  : 
+  references: MyString
+  : 
+  references: MyString
+  : 

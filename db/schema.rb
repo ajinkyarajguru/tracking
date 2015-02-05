@@ -11,7 +11,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150203084316) do
+ActiveRecord::Schema.define(version: 20150205071738) do
+
+  create_table "companies", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "projects", force: true do |t|
+    t.string   "projected_revenue"
+    t.string   "progress"
+    t.date     "start_on"
+    t.date     "planned_end"
+    t.date     "completed_on"
+    t.integer  "user_id"
+    t.integer  "company_id"
+    t.integer  "supplier_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "projects", ["company_id"], name: "index_projects_on_company_id"
+  add_index "projects", ["supplier_id"], name: "index_projects_on_supplier_id"
+  add_index "projects", ["user_id"], name: "index_projects_on_user_id"
+
+  create_table "revenues", force: true do |t|
+    t.integer  "year"
+    t.string   "quarter"
+    t.integer  "sales"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "suppliers", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.datetime "created_at"

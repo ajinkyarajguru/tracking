@@ -9,6 +9,12 @@ app.config(['$routeProvider', '$locationProvider',
         }).when('/users/:userId', {
             templateUrl: 'user.html',
             controller: 'UserCtrl'
+        }).when('/users', {
+            templateUrl: 'users.html',
+            controller: 'UsersCtrl'
+        }).when('/projects', {
+            templateUrl: 'projects.html',
+            controller: 'ProjectByUserCtrl'
         });
 
         $locationProvider.html5Mode({
