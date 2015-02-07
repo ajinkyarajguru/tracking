@@ -5,16 +5,22 @@ app.config(['$routeProvider', '$locationProvider',
 
         $routeProvider.when('/', {
             templateUrl: 'index.html',
-            controller: 'UserCtrl'
+            controller: 'UserController'
+        }).when('/users/new', {
+            templateUrl: 'newUser.html',
+            controller: 'UserFormController'
         }).when('/users/:userId', {
             templateUrl: 'user.html',
-            controller: 'UserCtrl'
+            controller: 'UserController'
         }).when('/users', {
             templateUrl: 'users.html',
-            controller: 'UsersCtrl'
+            controller: 'UsersController'
         }).when('/projects', {
             templateUrl: 'projects.html',
             controller: 'ProjectByUserCtrl'
+        }).when('/projects/:projectId', {
+            templateUrl: 'projects.html',
+            controller: 'ProjectsByUserController'
         });
 
         $locationProvider.html5Mode({
@@ -24,7 +30,3 @@ app.config(['$routeProvider', '$locationProvider',
 
     }
 ]);
-
-
-
-

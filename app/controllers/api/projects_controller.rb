@@ -1,7 +1,7 @@
-module Api
-class ProjectsController < BaseController
-	private
 
+module Api
+class ProjectsController < Api::BaseController
+	private
       def user_params
         params.require(:project).permit();
       end

@@ -1,0 +1,1 @@
+json.(project, :id, :projected_revenue)

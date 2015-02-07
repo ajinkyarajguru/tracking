@@ -1,16 +1,32 @@
-<header class="row">
+<header class="row no-margin">
   <h1 class="text-center col-md-6 col-md-offset-3">Ajinkya Industrial Suppliers</h1>
 </header>
 
-<section class="row" ng-if="user">
-  <h1 class="text-center h2">Overview</h1>
-  <ul class="unstyled-list">
-    <li>
-      <section class="well col-md-10 col-md-offset-1">
-        <h3 class="h3 col-md-2" style="margin-top: 0; padding-top:3px"><a href="#">{{user.name}}</a></h3>
-        <div class="col-md-2 col-md-offset-8 text-right">
-          <button class="btn btn-info">Edit</button>
-          <button class="btn btn-danger">Delete</button>
+<section class="row no-margin" ng-if="projects">
+  <h1 class="text-center h2">{{user.name}}</h1>
+  <ul class="list-unstyled">
+    
+      <li>
+      <section class="col-md-10 col-md-offset-1" >
+        <h5 class="h5 col-md-2" style="margin-top: 0; "><a href="#" ng-click="order('company');">Company</a></h5>
+        <h5 class="h5 col-md-1" style="margin-top: 0; "><a href="#" ng-click="order('supplier');">Principal</a></h5>
+        <h5 class="h5 col-md-2 text-right" style="margin-top: 0; "><a href="#" ng-click="order('projected_revenue');">Projected Revenue</a></h5>
+        <h5 class="h5 col-md-1 text-center" style="margin-top: 0; "><a href="#" ng-click="order('daystogo');">Days</a></h5>
+        <h5 class="h5 col-md-1 text-center" style="margin-top: 0; "><a href="#" ng-click="order('progress');">Progress</a></h5>
+        <div class="col-md-1 col-md-offset-4 text-right">          
+        </div>
+      </section>
+    </li>
+    
+    <li ng-repeat="row in projects" > 
+      <section class=" col-md-10 col-md-offset-1">
+        <h5 class="h5 col-md-2" style="margin-top: 0; padding-top:8px"><a href="#">{{row.company}}</a></h5>
+        <h5 class="h5 col-md-1" style="margin-top: 0; padding-top:8px"><a href="#">{{row.supplier}}</a></h5>
+        <h5 class="h5 col-md-2 text-right" style="margin-top: 0; padding-top:8px">{{row.projected_revenue}}</h5>
+        <h5 class="h5 col-md-1 text-center" style="margin-top: 0; padding-top:8px">{{row.daystogo}}</h5>
+        <h5 class="h5 col-md-1 text-center" style="margin-top: 0; padding-top:8px">{{row.progress}}</h5>
+        <div class="col-md-1 col-md-offset-4 text-right">
+          <button class="btn-danger" style="border:none;border-radius:5px">X</button>
         </div>
       </section>
     </li>
