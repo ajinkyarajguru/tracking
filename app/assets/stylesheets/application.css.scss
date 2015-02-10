@@ -13,9 +13,10 @@
  *= require_tree .
  *= require_self
  */
-
  
  @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
+ @import "bootstrap-select/dist/css/bootstrap-select";
+ @import "bootstrap-datepicker/css/datepicker3";
 
  
 

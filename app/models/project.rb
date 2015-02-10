@@ -4,6 +4,8 @@ class Project < ActiveRecord::Base
 	belongs_to :supplier
 	has_one :user
 
+	before_save :parse_date_string
+
 	attr_accessor :days_to_go
 
 	def days_to_go
@@ -26,6 +28,14 @@ class Project < ActiveRecord::Base
 			end
 		end
 		incomplete
+	end
+
+	def parse_date_string
+
+		puts(self.start_on.is_a? Date)
+		puts(self.planned_end.is_a? Date)
+		#self.start_on=Date.parse(self.start_on)
+		#self.planned_end=Date.parse(self.planned_end)
 	end
 
 end

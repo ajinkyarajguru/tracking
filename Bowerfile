@@ -1,4 +1,6 @@
 asset 'angular'
 asset 'angular-route'
 asset 'bootstrap-sass-official'
+asset 'bootstrap-select'
+asset 'bootstrap-datepicker'
 asset 'angular-resource'

@@ -1,3 +1,29 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.row .no-margin{
+	margin-left:0 px;
+	margin-right:0 px;
+}
+
+.list-unstyled .well h4.h4{
+	margin-top: 0;
+	padding-top: 7px;
+	margin-bottom: 7px;
+}
+
+.form-control{
+	width:auto !important;
+}
+
+.projects-form-custom-label{
+	padding-top:8px;
+}
+
+.custom-form{
+	margin-top:20px;
+	padding:20px;
+	background-color: #e3e3e3;
+	border-radius: 5px;
+}

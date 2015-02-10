@@ -7,19 +7,25 @@ app.config(['$routeProvider', '$locationProvider',
             templateUrl: 'index.html',
             controller: 'UserController'
         }).when('/users/new', {
-            templateUrl: 'newUser.html',
+            templateUrl: 'user.new.html',
             controller: 'UserFormController'
         }).when('/users/:userId', {
             templateUrl: 'user.html',
             controller: 'UserController'
+        }).when('/users/:userId/edit', {
+            templateUrl: 'user.edit.html',
+            controller: 'UserFormController'
         }).when('/users', {
-            templateUrl: 'users.html',
+            templateUrl: 'user.index.html',
             controller: 'UsersController'
         }).when('/projects', {
-            templateUrl: 'projects.html',
-            controller: 'ProjectByUserCtrl'
+            templateUrl: 'project.index.html',
+            controller: 'ProjectsByUserController'
+        }).when('/projects/new', {
+            templateUrl: 'project.new.html',
+            controller: 'ProjectsByUserController'
         }).when('/projects/:projectId', {
-            templateUrl: 'projects.html',
+            templateUrl: 'project.index.html',
             controller: 'ProjectsByUserController'
         });
 

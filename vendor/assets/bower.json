@@ -4,6 +4,8 @@
     "angular": "latest",
     "angular-route": "latest",
     "bootstrap-sass-official": "latest",
+    "Selecter": "latest",
+    "bootstrap-datepicker": "latest",
     "angular-resource": "latest"
   }
 }
