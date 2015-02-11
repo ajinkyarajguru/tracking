@@ -20,7 +20,7 @@ class Project < ActiveRecord::Base
 		end
 	end
 
-	def self.find_incomplete_projects
+	def self.get_active_projects
 		incomplete=Array.new
 		Project.all.each do |project|
 			if !project.is_completed

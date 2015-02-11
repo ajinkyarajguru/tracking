@@ -17,8 +17,12 @@
 	width:auto !important;
 }
 
-.projects-form-custom-label{
+.form-custom-label{
 	padding-top:8px;
+}
+
+.users-header{
+	margin-bottom:20px
 }
 
 .custom-form{
@@ -27,3 +31,31 @@
 	background-color: #e3e3e3;
 	border-radius: 5px;
 }
+
+.form-control.datepicker{
+	padding:6px 12px;
+}
+
+
+
+.users{
+	.custom-buttons{
+		padding-top: 2px
+	}
+
+	.user-field{
+		overflow: hidden;
+		text-overflow: ellipsis;
+		margin-top: 0px; 
+		padding-top:8px;
+
+		.user-name{
+			white-space: nowrap;
+		}
+	}
+
+	.user-active{
+
+	}
+}
+

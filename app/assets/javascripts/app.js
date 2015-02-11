@@ -27,7 +27,15 @@ app.config(['$routeProvider', '$locationProvider',
         }).when('/projects/:projectId', {
             templateUrl: 'project.index.html',
             controller: 'ProjectsByUserController'
-        });
+        }).when('/suppliers/new', {
+            templateUrl: 'supplier.new.html',
+            controller: 'SupplierFormController'
+        }).when('/companies/new', {
+            templateUrl: 'company.new.html',
+            controller: 'CompanyFormController'
+        })
+
+        ;//.otherwise({ redirectTo: '/users' });
 
         $locationProvider.html5Mode({
             enabled: true,
@@ -36,3 +44,11 @@ app.config(['$routeProvider', '$locationProvider',
 
     }
 ]);
+
+
+app.filter("removeNA",function(){
+    return function(input, nullValue, replacement){
+        return (input===nullValue) ? replacement : input
+    }
+
+})

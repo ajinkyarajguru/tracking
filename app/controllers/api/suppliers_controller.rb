@@ -3,7 +3,7 @@ module Api
 
 		private
 
-	      def user_params
+	      def supplier_params
 	        params.require(:supplier).permit(:name)
 	      end
 

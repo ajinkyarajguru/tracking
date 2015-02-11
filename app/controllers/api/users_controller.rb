@@ -1,6 +1,6 @@
 module Api
   class UsersController < Api::BaseController
-  	
+
   	private
 
       def user_params
@@ -8,7 +8,7 @@ module Api
       end
 
       def query_params
-        params.permit(:id, :username)
+        params.permit(:id, :name)
       end
   end
 end

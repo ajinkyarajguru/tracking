@@ -3,8 +3,9 @@
   "dependencies": {
     "angular": "latest",
     "angular-route": "latest",
+    "angular-chart": "latest",
     "bootstrap-sass-official": "latest",
-    "Selecter": "latest",
+    "bootstrap-select": "latest",
     "bootstrap-datepicker": "latest",
     "angular-resource": "latest"
   }

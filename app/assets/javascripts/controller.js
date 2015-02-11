@@ -50,6 +50,10 @@ controllers.controller("UsersController", ['$scope', 'User',
         User.query().$promise.then(function(result) {
             $scope.users = result;
         });
+
+        $scope.edit=function(){
+            
+        };
     }
 ]);
 
@@ -74,8 +78,8 @@ controllers.controller('UserFormController', ['$scope', 'User',
     }
 ]);
 
-controllers.controller('ProjectsByUserController', ['$scope','User','Company','Supplier','Project',
-    function($scope,User,Company,Supplier,Project) {
+controllers.controller('ProjectsByUserController', ['$scope','$timeout','User','Company','Supplier','Project',
+    function($scope,$timeout,User,Company,Supplier,Project) {
 
         
 
@@ -86,8 +90,8 @@ controllers.controller('ProjectsByUserController', ['$scope','User','Company','S
           newProject = new Project();
           newProject.user_id = project.user.id;
           newProject.supplier_id = project.supplier.id;
-         newProject.company_id = project.company.id;
-         newProject.projected_revenue=project.projected_revenue;
+          newProject.company_id = project.company.id;
+          newProject.projected_revenue=project.projected_revenue;
           newProject.start_on=project.start_on;
           newProject.planned_end=project.planned_end;
           
@@ -96,24 +100,24 @@ controllers.controller('ProjectsByUserController', ['$scope','User','Company','S
 
         User.query().$promise.then(function(users){
             $scope.users=users;
-            setTimeout(function(){
+            $timeout(function(){
                 $('.selectpicker').selectpicker('refresh');
-            },10);
+            });
         });
 
         Supplier.query().$promise.then(function(suppliers){
             $scope.suppliers=suppliers;
-            setTimeout(function(){
+            $timeout(function(){
                 $('.selectpicker').selectpicker('refresh');
-            },10);
+            });
 
         });
 
         Company.query().$promise.then(function(companies){            
             $scope.companies=companies;
-            setTimeout(function(){
+            $timeout(function(){
                 $('.selectpicker').selectpicker('refresh');
-            },10);
+            });
         });
 
         $('.datepicker').datepicker({
@@ -123,6 +127,46 @@ controllers.controller('ProjectsByUserController', ['$scope','User','Company','S
         $('.selectpicker').selectpicker({            
             size:3
         });
+
+    }
+]);
+
+controllers.controller('SupplierFormController', ['$scope', 'Supplier',
+    function($scope, Supplier) {
+
+        $scope.master = {};
+
+        $scope.supplier = {};
+
+        $scope.update = function(supplier) {
+            newSupplier = new Supplier();
+            newSupplier.supplier = supplier;
+            newSupplier.$save(function(result) {});
+        };
+
+        $scope.reset = function() {
+            $scope.supplier = $scope.master;
+        };
+
+    }
+]);
+
+controllers.controller('CompanyFormController', ['$scope', 'Company',
+    function($scope, Company) {
+
+        $scope.master = {};
+
+        $scope.company = {};
+
+        $scope.update = function(company) {
+            newCompany = new Company();
+            newCompany.company = company;
+            newCompany.$save(function(result) {});
+        };
+
+        $scope.reset = function() {
+            $scope.company = $scope.master;
+        };
 
     }
 ]);

@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category: MyString
+  : MyString
+  priority: MyString
+  : 
+  deadline: MyString
+  : 2015-02-11
+  references: 
+  references: MyString
+  : 
+
+two:
+  category: MyString
+  : MyString
+  priority: MyString
+  : 
+  deadline: MyString
+  : 2015-02-11
+  references: 
+  references: MyString
+  : 

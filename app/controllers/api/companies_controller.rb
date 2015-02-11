@@ -1,7 +1,7 @@
 module Api
 	class CompaniesController < Api::BaseController
 		private
-			def user_params
+			def company_params
 				params.require(:company).permit(:name);
 			end
 

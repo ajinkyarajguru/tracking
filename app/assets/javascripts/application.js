@@ -16,6 +16,7 @@
 //= require angular-rails-templates
 //= require angular-route/angular-route
 //= require angular-resource/angular-resource
+//= require angular-chart/angular-chart
 //= require bootstrap-sass-official/assets/javascripts/bootstrap
 //= require bootstrap-datepicker/js/bootstrap-datepicker
 //= require bootstrap-select/dist/js/bootstrap-select

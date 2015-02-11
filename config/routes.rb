@@ -65,6 +65,8 @@ Rails.application.routes.draw do
     resources :projects
     resources :companies
     resources :suppliers
+
+    delete '/users/:id', to: 'users#destroy', as: "delete_user"
   end
 
   get '*path'=>'home#index'

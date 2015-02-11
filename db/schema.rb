@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150205071738) do
+ActiveRecord::Schema.define(version: 20150211060812) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -47,6 +47,17 @@ ActiveRecord::Schema.define(version: 20150205071738) do
 
   create_table "suppliers", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tasks", force: true do |t|
+    t.string   "category"
+    t.integer  "priority"
+    t.date     "deadline"
+    t.integer  "user_id"
+    t.integer  "company_id"
+    t.integer  "task_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

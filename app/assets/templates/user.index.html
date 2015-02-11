@@ -1,16 +1,18 @@
-<header class="row">
-  <h1 class="text-center col-md-6 col-md-offset-3">Ajinkya Industrial Suppliers</h1>
-</header>
 
-<section class="row" ng-if="users">
+<h1 class="users-header text-center col-md-6 col-md-offset-3">Ajinkya Industrial Suppliers</h1>
+
+
+<section class="users" ng-if="users">
   
   <ul class="list-unstyled">
     <li ng-repeat="user in users">
       <section class="well well-sm col-md-10 col-md-offset-1">
-        <h4 class="h4 col-md-2" style="margin-top: 0; padding-top:8px"><a href="#">{{user.name}}</a></h4>
-        <div class="col-md-2 col-md-offset-8 text-right">
-          <button class="btn btn-info btn-sm">Edit</button>
-          <button class="btn btn-danger btn-sm">Delete</button>
+        <h4 class="h4 col-md-2 user-field"><a class="user-name" ng-href="{{user.path}}">{{user.name}}</a></h4>
+        <h5 class="h5 col-md-1 user-active">{{user.active|removeNA : 0 : ""}}</h5>
+        <div class="col-md-1"><button class="btn btn-sm btn-info" style="background:transparent;margin-top:2px; border:none"><span class="glyphicon glyphicon-apple"></span></button></div>
+        <div class="col-md-2 col-md-offset-6 text-right custom-buttons">
+          <a href="" class="btn btn-info btn-sm">Edit</a>
+          <a ng-href=".{{user.delete_url}}" class="btn btn-danger btn-sm" data-method="delete">Delete</a>
         </div>
       </section>
     </li>
