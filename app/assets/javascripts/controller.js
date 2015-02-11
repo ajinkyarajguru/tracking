@@ -21,6 +21,7 @@ controllers.controller("UserController", ['$scope', '$routeParams', 'User', '$fi
             $scope.user = result;
             $scope.projects = $scope.user.projects;
             $scope.order($scope.column, $scope.ascending);
+            //$('[data-toggle="popover"]').popover();
         });
 
         $scope.order = function(predicate) {
@@ -127,6 +128,8 @@ controllers.controller('ProjectsByUserController', ['$scope','$timeout','User','
         $('.selectpicker').selectpicker({            
             size:3
         });
+
+        
 
     }
 ]);
