@@ -1,10 +1,10 @@
 controllers = angular.module('controllers', []).factory('User', function($resource) {
     return $resource('/api/users/:userId');
-}).factory('Project', function ($resource) {
+}).factory('Project', function($resource) {
     return $resource('/api/projects/:projectId');
-}).factory('Company', function ($resource) {
+}).factory('Company', function($resource) {
     return $resource('/api/companies/:companyId');
-}).factory('Supplier', function ($resource) {
+}).factory('Supplier', function($resource) {
     return $resource('/api/suppliers/:supplierId');
 });
 
@@ -13,7 +13,20 @@ controllers.controller("UserController", ['$scope', '$routeParams', 'User', '$fi
 
         var orderBy = $filter('orderBy');
 
+        if (value == 5) {
+            type = 'success';
+        } else if (value > 2 && value < 5) {
+            type = 'info';
+        } else if (value < 3 && value > 1) {
+            type = 'warning';
+        } else {
+            type = 'danger';
+        }
+
+
         $scope.id = $routeParams.userId
+        $scope.stacked = [];
+
 
         User.get({
             userId: $scope.id
@@ -21,7 +34,11 @@ controllers.controller("UserController", ['$scope', '$routeParams', 'User', '$fi
             $scope.user = result;
             $scope.projects = $scope.user.projects;
             $scope.order($scope.column, $scope.ascending);
-            //$('[data-toggle="popover"]').popover();
+
+            /*var types = ['success', 'info', 'warning', 'danger'];
+            angular.forEach($scope.projects, function(project){
+                console.log(project.progress);
+            }); */
         });
 
         $scope.order = function(predicate) {
@@ -52,9 +69,6 @@ controllers.controller("UsersController", ['$scope', 'User',
             $scope.users = result;
         });
 
-        $scope.edit=function(){
-            
-        };
     }
 ]);
 
@@ -79,57 +93,57 @@ controllers.controller('UserFormController', ['$scope', 'User',
     }
 ]);
 
-controllers.controller('ProjectsByUserController', ['$scope','$timeout','User','Company','Supplier','Project',
-    function($scope,$timeout,User,Company,Supplier,Project) {
+controllers.controller('ProjectsByUserController', ['$scope', '$timeout', 'User', 'Company', 'Supplier', 'Project',
+    function($scope, $timeout, User, Company, Supplier, Project) {
 
-        
+
 
         $scope.addProject = function(project) {
-     
 
-     console.log(project.company)     
-          newProject = new Project();
-          newProject.user_id = project.user.id;
-          newProject.supplier_id = project.supplier.id;
-          newProject.company_id = project.company.id;
-          newProject.projected_revenue=project.projected_revenue;
-          newProject.start_on=project.start_on;
-          newProject.planned_end=project.planned_end;
-          
-          newProject.$save(function(result) {});  
+
+            console.log(project.company)
+            newProject = new Project();
+            newProject.user_id = project.user.id;
+            newProject.supplier_id = project.supplier.id;
+            newProject.company_id = project.company.id;
+            newProject.projected_revenue = project.projected_revenue;
+            newProject.start_on = project.start_on;
+            newProject.planned_end = project.planned_end;
+
+            newProject.$save(function(result) {});
         };
 
-        User.query().$promise.then(function(users){
-            $scope.users=users;
-            $timeout(function(){
+        User.query().$promise.then(function(users) {
+            $scope.users = users;
+            $timeout(function() {
                 $('.selectpicker').selectpicker('refresh');
             });
         });
 
-        Supplier.query().$promise.then(function(suppliers){
-            $scope.suppliers=suppliers;
-            $timeout(function(){
+        Supplier.query().$promise.then(function(suppliers) {
+            $scope.suppliers = suppliers;
+            $timeout(function() {
                 $('.selectpicker').selectpicker('refresh');
             });
 
         });
 
-        Company.query().$promise.then(function(companies){            
-            $scope.companies=companies;
-            $timeout(function(){
+        Company.query().$promise.then(function(companies) {
+            $scope.companies = companies;
+            $timeout(function() {
                 $('.selectpicker').selectpicker('refresh');
             });
         });
 
         $('.datepicker').datepicker({
-             format: 'yyyy-mm-dd'
+            format: 'yyyy-mm-dd'
         });
 
-        $('.selectpicker').selectpicker({            
-            size:3
+        $('.selectpicker').selectpicker({
+            size: 3
         });
 
-        
+
 
     }
 ]);

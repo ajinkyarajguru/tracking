@@ -3,12 +3,14 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
-# Use sqlite3 as the database for Active Record
-group :development, :test do
-gem 'sqlite3'
-end
+# Use postgresql as the database for Active Record
+
+gem 'pg'
+
 group :production do
-  gem 'pg'
+  
+  gem 'rails_12factor'
+  
 end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
@@ -36,9 +38,7 @@ gem 'angular-rails-templates'
 
 gem 'angular_rails_csrf'
 
-gem 'rails_12factor', group: :production
-
-gem 'puma', group: :production
+gem 'puma'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -52,4 +52,3 @@ gem 'puma', group: :production
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-ruby '2.1.1'

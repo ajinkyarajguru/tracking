@@ -1,4 +1,4 @@
-var app = angular.module('tracking', ['templates', 'ngRoute', 'controllers', 'ngResource']);
+var app = angular.module('tracking', ['templates', 'ngRoute', 'controllers', 'ngResource','ui.bootstrap','angularChart']);
 
 app.config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
@@ -10,7 +10,7 @@ app.config(['$routeProvider', '$locationProvider',
             templateUrl: 'user.new.html',
             controller: 'UserFormController'
         }).when('/users/:userId', {
-            templateUrl: 'user.html',
+            templateUrl: 'user.show.html',
             controller: 'UserController'
         }).when('/users/:userId/edit', {
             templateUrl: 'user.edit.html',
