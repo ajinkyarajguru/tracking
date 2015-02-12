@@ -4,8 +4,8 @@ app.config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
 
         $routeProvider.when('/', {
-            templateUrl: 'index.html',
-            controller: 'UserController'
+            templateUrl: 'login.html',
+            controller: 'LoginController'
         }).when('/users/new', {
             templateUrl: 'user.new.html',
             controller: 'UserFormController'

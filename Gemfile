@@ -3,6 +3,11 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
+
+#bcrypt for hashed-passwords
+
+gem 'bcrypt'
+
 # Use postgresql as the database for Active Record
 group :development, :testing do
 	gem 'sqlite3'
@@ -12,6 +17,7 @@ group :production do
   
   gem 'rails_12factor'
   gem 'pg'
+  gem 'puma'
   
 end
 # Use SCSS for stylesheets
@@ -39,8 +45,6 @@ gem 'bower-rails'
 gem 'angular-rails-templates'
 
 gem 'angular_rails_csrf'
-
-gem 'puma'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

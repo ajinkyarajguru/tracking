@@ -8,12 +8,16 @@ controllers = angular.module('controllers', []).factory('User', function($resour
     return $resource('/api/suppliers/:supplierId');
 });
 
+controllers.controller('LoginController', ['$scope', function ($scope) {
+    
+}]);
+
 controllers.controller("UserController", ['$scope', '$routeParams', 'User', '$filter',
     function($scope, $routeParams, User, $filter) {
 
         var orderBy = $filter('orderBy');
 
-        if (value == 5) {
+      /*  if (value == 5) {
             type = 'success';
         } else if (value > 2 && value < 5) {
             type = 'info';
@@ -21,12 +25,10 @@ controllers.controller("UserController", ['$scope', '$routeParams', 'User', '$fi
             type = 'warning';
         } else {
             type = 'danger';
-        }
+        }*/
 
 
         $scope.id = $routeParams.userId
-        $scope.stacked = [];
-
 
         User.get({
             userId: $scope.id
@@ -34,11 +36,6 @@ controllers.controller("UserController", ['$scope', '$routeParams', 'User', '$fi
             $scope.user = result;
             $scope.projects = $scope.user.projects;
             $scope.order($scope.column, $scope.ascending);
-
-            /*var types = ['success', 'info', 'warning', 'danger'];
-            angular.forEach($scope.projects, function(project){
-                console.log(project.progress);
-            }); */
         });
 
         $scope.order = function(predicate) {
@@ -55,7 +52,6 @@ controllers.controller("UserController", ['$scope', '$routeParams', 'User', '$fi
 
         $scope.ascending = true;
         $scope.column = "projected_revenue";
-
     }
 
 ]);
@@ -83,7 +79,9 @@ controllers.controller('UserFormController', ['$scope', 'User',
         $scope.update = function(user) {
             newUser = new User();
             newUser.user = user;
-            newUser.$save(function(result) {});
+            newUser.$save(function(result) {
+                console.log(result)
+            });
         };
 
         $scope.reset = function() {
