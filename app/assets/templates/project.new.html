@@ -5,21 +5,21 @@
 	<section class="col-md-10 col-md-offset-1 custom-form">
 		<div class="form-group row">		
 			<label for="exampleInputPassword1" class="col-md-3 col-md-offset-3 text-right form-custom-label">Company</label>
-			<select class="selectpicker" class="form-control col-md-5" ng-model="newProject.company" ng-options="company.name for company in companies track by company.id" data-size="5" title="Select Company" data-live-search="true">
+			<select class="form-control" class="form-control col-md-5" ng-model="newProject.company" ng-options="company.name for company in companies track by company.id" data-size="5" title="Select Company" data-live-search="true">
 				 <!-- <option ng-if="false"></option> -->
 			</select>
 		</div>
 
 		<div class="form-group row">		
 			<label for="exampleInputPassword1" class="col-md-3 col-md-offset-3 text-right form-custom-label">Assigned to</label>
-			<select class="selectpicker" class="form-control col-md-5" ng-model="newProject.user" ng-options="user.name for user in users track by user.id" data-size="5" title="Select Asignee">
+			<select class="form-control" class="form-control col-md-5" ng-model="newProject.user" ng-options="user.name for user in users track by user.id" data-size="5" title="Select Asignee">
 				 <!-- <option ng-if="false"></option>  -->
 			</select>
 		</div>
 
 		<div class="form-group row">		
 			<label for="exampleInputPassword1" class="col-md-3 col-md-offset-3 text-right form-custom-label">Principal</label>
-			<select class="selectpicker" class="form-control col-md-5" ng-model="newProject.supplier" ng-options="supplier.name for supplier in suppliers track by supplier.id" data-size="5" title="Select Supplier">
+			<select class="form-control" class="form-control col-md-5" ng-model="newProject.supplier" ng-options="supplier.name for supplier in suppliers track by supplier.id" data-size="5" title="Select Supplier">
 				<!-- <option ng-if="false"></option>  -->
 			</select>
 		</div>

@@ -6,5 +6,5 @@ json.array! @projects do |project|
 	json.daystogo project.days_to_go
 	json.start project.start_on
 	json.end project.planned_end
-	json.completed_date project.completed_on
+	
 end

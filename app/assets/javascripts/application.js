@@ -17,6 +17,7 @@
 //= require angular-route/angular-route
 //= require angular-resource/angular-resource
 //= require angular-chart/angular-chart
+//= require bootstrap/dist/js/bootstrap
 //= require angular-bootstrap/ui-bootstrap
 //= require angular-bootstrap/ui-bootstrap-tpls
 //= require bootstrap-datepicker/js/bootstrap-datepicker

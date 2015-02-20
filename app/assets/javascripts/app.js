@@ -1,5 +1,7 @@
 var app = angular.module('tracking', ['templates', 'ngRoute', 'controllers', 'ngResource','ui.bootstrap','angularChart']);
 
+ 
+
 app.config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
 
@@ -50,5 +52,4 @@ app.filter("removeNA",function(){
     return function(input, nullValue, replacement){
         return (input===nullValue) ? replacement : input
     }
-
 })

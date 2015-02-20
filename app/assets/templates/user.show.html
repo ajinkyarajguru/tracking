@@ -1,32 +1,43 @@
-<header class="row no-margin">
-  <h1 class="text-center col-md-6 col-md-offset-3">Ajinkya Industrial Suppliers</h1>
+<header class="">
+  <h1 class="text-center">Ajinkya Industrial Suppliers</h1>
 </header>
-
-<section class="row no-margin" ng-if="projects">
+<section class="" ng-if="projects">
   <h1 class="text-center h2">{{user.name}}</h1>
   <ul class="list-unstyled">
     
-      <li>
+    <li class="project-header">
       <section class="col-md-10 col-md-offset-1" >
         <h5 class="h5 col-md-2" style="margin-top: 0; "><a href="#" ng-click="order('company');">Company</a></h5>
         <h5 class="h5 col-md-1" style="margin-top: 0; "><a href="#" ng-click="order('supplier');">Principal</a></h5>
-        <h5 class="h5 col-md-2 text-right" style="margin-top: 0; "><a href="#" ng-click="order('projected_revenue');">Projected Revenue</a></h5>
+        <h5 class="h5 col-md-1 text-right" style="margin-top: 0; white-space: no-wrap; text-overflow: ellipsis; overflow: hidden "><a href="#" ng-click="order('projected_revenue');">Projected</a></h5>
         <h5 class="h5 col-md-1 text-center" style="margin-top: 0; "><a href="#" ng-click="order('daystogo');">Days</a></h5>
-        <h5 class="h5 col-md-1 text-center" style="margin-top: 0; "><a href="#" ng-click="order('progress');">Progress</a></h5>
-        <div class="col-md-1 col-md-offset-4 text-right">          
+        <h5 class="h5 col-md-2 text-center" style="margin-top: 0; "><a href="#" ng-click="order('progress');">Progress</a></h5>
+        <div class="col-md-1 col-md-offset-4 text-right">
         </div>
       </section>
     </li>
     
-    <li ng-repeat="row in projects" > 
+    <li ng-repeat="row in projects" class="user-projects" >
       <section class=" col-md-10 col-md-offset-1">
         <h5 class="h5 col-md-2" style="margin-top: 0; padding-top:8px"><a href="#">{{row.company}}</a></h5>
         <h5 class="h5 col-md-1" style="margin-top: 0; padding-top:8px"><a href="#">{{row.supplier}}</a></h5>
-        <h5 class="h5 col-md-2 text-right" style="margin-top: 0; padding-top:8px">{{row.projected_revenue}}</h5>
+        <h5 class="h5 col-md-1 text-right" style="margin-top: 0; padding-top:8px">{{row.projected_revenue}}</h5>
         <h5 class="h5 col-md-1 text-center" style="margin-top: 0; padding-top:8px">{{row.daystogo}}</h5>
-        <h5 class="h5 col-md-2 text-center" style="margin-top: 0; padding-top:8px"><progressbar class=" active" max="200" value="166" type="info"><i>166 / 200</i></progressbar></h5>
-        <div class="col-md-1 col-md-offset-2 text-right">
-          <button class="btn-danger btn-sm btn">X</button>
+        <h5 class="h5 col-md-2 text-center" style="margin-top: 0; padding-top:5px"><progressbar class="active custom-progress" value="row.progress" max="5" type="getType(row.progress)"><i></i></progressbar></h5>
+        
+        <div class="btn-group col-md-1 col-md-offset-4 text-right">
+          <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#" ng-click="updateProgress(1,row.project_id);">Initial</a></li>
+            <li><a href="#" ng-click="updateProgress(2,row.project_id);">Trial Approved</a></li>
+            <li><a href="#" ng-click="updateProgress(3,row.project_id);">Trial Sucessful</a></li>
+            <li><a href="#" ng-click="updateProgress(4,row.project_id);">First Order</a></li>
+            <li><a href="#" ng-click="updateProgress(5,row.project_id);">Project Complete</a></li>
+            <li class="divider"></li>
+            <li><a ng-href="./{{row.delete_project_url}}" data-method="delete" class="btn btn-danger" style="margin:10px">Remove</a></li>
+          </ul>
         </div>
       </section>
     </li>

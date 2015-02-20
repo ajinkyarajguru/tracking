@@ -1,7 +1,9 @@
 controllers = angular.module('controllers', []).factory('User', function($resource) {
     return $resource('/api/users/:userId');
 }).factory('Project', function($resource) {
-    return $resource('/api/projects/:projectId');
+    return $resource('/api/projects/:projectId',null,{
+        'update':{ method:'PUT' }
+    });
 }).factory('Company', function($resource) {
     return $resource('/api/companies/:companyId');
 }).factory('Supplier', function($resource) {
@@ -12,21 +14,10 @@ controllers.controller('LoginController', ['$scope', function ($scope) {
     
 }]);
 
-controllers.controller("UserController", ['$scope', '$routeParams', 'User', '$filter',
-    function($scope, $routeParams, User, $filter) {
+controllers.controller("UserController", ['$scope', '$routeParams', 'User', '$filter','Project',
+    function($scope, $routeParams, User, $filter, Project) {
 
         var orderBy = $filter('orderBy');
-
-      /*  if (value == 5) {
-            type = 'success';
-        } else if (value > 2 && value < 5) {
-            type = 'info';
-        } else if (value < 3 && value > 1) {
-            type = 'warning';
-        } else {
-            type = 'danger';
-        }*/
-
 
         $scope.id = $routeParams.userId
 
@@ -37,6 +28,17 @@ controllers.controller("UserController", ['$scope', '$routeParams', 'User', '$fi
             $scope.projects = $scope.user.projects;
             $scope.order($scope.column, $scope.ascending);
         });
+
+        $scope.updateProgress=function(progress,project_id){
+
+            Project.get({projectId:project_id},function(updateProject){
+                console.log(updateProject);
+                updateProject.progress=progress;
+                Project.update({projectId:project_id},updateProject);
+            });
+
+
+        };
 
         $scope.order = function(predicate) {
 
@@ -94,11 +96,7 @@ controllers.controller('UserFormController', ['$scope', 'User',
 controllers.controller('ProjectsByUserController', ['$scope', '$timeout', 'User', 'Company', 'Supplier', 'Project',
     function($scope, $timeout, User, Company, Supplier, Project) {
 
-
-
         $scope.addProject = function(project) {
-
-
             console.log(project.company)
             newProject = new Project();
             newProject.user_id = project.user.id;
@@ -107,41 +105,25 @@ controllers.controller('ProjectsByUserController', ['$scope', '$timeout', 'User'
             newProject.projected_revenue = project.projected_revenue;
             newProject.start_on = project.start_on;
             newProject.planned_end = project.planned_end;
-
+            
             newProject.$save(function(result) {});
         };
 
         User.query().$promise.then(function(users) {
             $scope.users = users;
-            $timeout(function() {
-                $('.selectpicker').selectpicker('refresh');
-            });
         });
 
         Supplier.query().$promise.then(function(suppliers) {
             $scope.suppliers = suppliers;
-            $timeout(function() {
-                $('.selectpicker').selectpicker('refresh');
-            });
-
         });
 
         Company.query().$promise.then(function(companies) {
             $scope.companies = companies;
-            $timeout(function() {
-                $('.selectpicker').selectpicker('refresh');
-            });
         });
 
         $('.datepicker').datepicker({
             format: 'yyyy-mm-dd'
         });
-
-        $('.selectpicker').selectpicker({
-            size: 3
-        });
-
-
 
     }
 ]);
