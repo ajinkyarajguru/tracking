@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150212141307) do
+ActiveRecord::Schema.define(version: 20150220191131) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20150212141307) do
     t.integer  "supplier_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "completed",                     default: false
   end
 
   add_index "projects", ["company_id"], name: "index_projects_on_company_id"

@@ -32,11 +32,20 @@ controllers.controller("UserController", ['$scope', '$routeParams', 'User', '$fi
         $scope.updateProgress=function(progress,project_id){
 
             Project.get({projectId:project_id},function(updateProject){
-                console.log(updateProject);
                 updateProject.progress=progress;
+                            
+                if(progress===5){
+                    updateProject.completed_on=new Date();
+                }
+                
                 Project.update({projectId:project_id},updateProject);
             });
 
+            angular.forEach($scope.projects,function(project,index){
+                if(project.project_id===project_id){
+                    $scope.projects[index].progress=progress;
+                }
+            });
 
         };
 
