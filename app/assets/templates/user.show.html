@@ -7,9 +7,11 @@
     
     <li class="project-header">
       <section class="col-md-10 col-md-offset-1" >
-        <h5 class="h5 col-md-2" style="margin-top: 0; "><a href="#" ng-click="order('company');">Company</a></h5>
+
+        <h5 class="h5 col-md-2" style="margin-top: 0; "><a href="#" ng-click="order('company');" class="">Company</a>
+        </h5>
         <h5 class="h5 col-md-1" style="margin-top: 0; "><a href="#" ng-click="order('supplier');">Principal</a></h5>
-        <h5 class="h5 col-md-1 text-right" style="margin-top: 0; white-space: no-wrap; text-overflow: ellipsis; overflow: hidden "><a href="#" ng-click="order('projected_revenue');">Projected</a></h5>
+        <h5 class="h5 col-md-2 text-right" style="margin-top: 0; white-space: no-wrap; text-overflow: ellipsis; overflow: hidden "><a href="#" ng-click="order('projected_revenue');">Projected Revenue</a></h5>
         <h5 class="h5 col-md-1 text-center" style="margin-top: 0; "><a href="#" ng-click="order('daystogo');">Days</a></h5>
         <h5 class="h5 col-md-2 text-center" style="margin-top: 0; "><a href="#" ng-click="order('progress');">Progress</a></h5>
         <div class="col-md-1 col-md-offset-4 text-right">
@@ -21,11 +23,11 @@
       <section class=" col-md-10 col-md-offset-1">
         <h5 class="h5 col-md-2" style="margin-top: 0; padding-top:8px"><a href="#">{{row.company}}</a></h5>
         <h5 class="h5 col-md-1" style="margin-top: 0; padding-top:8px"><a href="#">{{row.supplier}}</a></h5>
-        <h5 class="h5 col-md-1 text-right" style="margin-top: 0; padding-top:8px">{{row.projected_revenue}}</h5>
+        <h5 class="h5 col-md-2 text-right" style="margin-top: 0; padding-top:8px">{{row.projected_revenue|rupee:"&#8377;"}}</h5>
         <h5 class="h5 col-md-1 text-center" style="margin-top: 0; padding-top:8px">{{row.daystogo}}</h5>
         <h5 class="h5 col-md-2 text-center" style="margin-top: 0; padding-top:5px"><progressbar class="active custom-progress" value="row.progress" max="5" type="getType(row.progress)"><i></i></progressbar></h5>
         
-        <div class="btn-group col-md-1 col-md-offset-4 text-right">
+        <div class="btn-group col-md-1 col-md-offset-3 text-right">
           <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
           <span class="caret"></span>
           </button>

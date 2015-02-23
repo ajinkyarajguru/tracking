@@ -8,7 +8,6 @@ class Project < ActiveRecord::Base
 	validates :start_on, presence: true
 	validates :planned_end, presence: true
 
-
 	def start_date_before_end_date
 		if start_on>planned_end
 			errors.add(:start_on,"Start Date cannot be after planned end")

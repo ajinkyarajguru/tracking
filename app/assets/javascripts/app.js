@@ -25,7 +25,7 @@ app.config(['$routeProvider', '$locationProvider',
             controller: 'ProjectsByUserController'
         }).when('/projects/new', {
             templateUrl: 'project.new.html',
-            controller: 'ProjectsByUserController'
+            controller: 'ProjectsFormController'
         }).when('/projects/:projectId', {
             templateUrl: 'project.index.html',
             controller: 'ProjectsByUserController'
@@ -35,6 +35,8 @@ app.config(['$routeProvider', '$locationProvider',
         }).when('/companies/new', {
             templateUrl: 'company.new.html',
             controller: 'CompanyFormController'
+        }).when('/projects/tasks/create',{
+            templateUrl: 'project.tasks.create.html'
         })
 
         ;//.otherwise({ redirectTo: '/users' });
@@ -52,4 +54,35 @@ app.filter("removeNA",function(){
     return function(input, nullValue, replacement){
         return (input===nullValue) ? replacement : input
     }
-})
+});
+
+app.filter("rupee",function(){
+    return function(input,currencySymbol){
+
+        separated=input.toString().split("").reverse();
+        i=4;
+        j=2;
+        flag=false;
+        separated.splice(3,0,",");
+        input=input/1000;
+
+        while(input>100){
+            if(flag==true){
+                j++;
+                flag=false;
+            }else{
+                flag=true;
+            }
+            
+            i+=j;
+
+            separated.splice(i,0,",");
+            input/=100;
+
+        }
+        separated.push(" ");
+        separated.push(currencySymbol);
+
+        return separated.reverse().join("")
+    }
+});

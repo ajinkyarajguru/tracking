@@ -13,8 +13,12 @@
 	margin-bottom: 7px;
 }
 
-.form-control{
-	width:auto !important;
+.create-project {
+	.custom-form{
+		.custom-form-control{
+			width:auto;
+		}
+	}
 }
 
 .form-custom-label{

@@ -102,8 +102,10 @@ controllers.controller('UserFormController', ['$scope', 'User',
     }
 ]);
 
-controllers.controller('ProjectsByUserController', ['$scope', '$timeout', 'User', 'Company', 'Supplier', 'Project',
-    function($scope, $timeout, User, Company, Supplier, Project) {
+controllers.controller('ProjectsFormController', ['$scope', '$location','$timeout', 'User', 'Company', 'Supplier', 'Project',
+    function($scope, $location, $timeout, User, Company, Supplier, Project) {
+
+        
 
         $scope.addProject = function(project) {
             console.log(project.company)
@@ -115,24 +117,40 @@ controllers.controller('ProjectsByUserController', ['$scope', '$timeout', 'User'
             newProject.start_on = project.start_on;
             newProject.planned_end = project.planned_end;
             
-            newProject.$save(function(result) {});
+            newProject.$save(function(result) {
+                console.log(result);
+                if(result==true){
+                    $location.path("/projects");
+                }
+            });
         };
 
         User.query().$promise.then(function(users) {
             $scope.users = users;
+            $timeout(function(){
+                $(".selectpicker").selectpicker('refresh');
+            });
         });
 
         Supplier.query().$promise.then(function(suppliers) {
             $scope.suppliers = suppliers;
+            $timeout(function(){
+                $(".selectpicker").selectpicker('refresh');
+            });
         });
 
         Company.query().$promise.then(function(companies) {
             $scope.companies = companies;
+            $timeout(function(){
+                $(".selectpicker").selectpicker('refresh');
+            });
         });
 
         $('.datepicker').datepicker({
             format: 'yyyy-mm-dd'
         });
+
+        $(".selectpicker").selectpicker();
 
     }
 ]);
