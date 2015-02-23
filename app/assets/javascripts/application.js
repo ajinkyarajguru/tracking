@@ -18,6 +18,8 @@
 //= require angular-resource/angular-resource
 //= require angular-chart/angular-chart
 //= require bootstrap/dist/js/bootstrap
+//= require bootstrap-sass/assets/javascripts/bootstrap-sprockets
+//= require bootstrap-sass/assets/javascripts/bootstrap
 //= require angular-bootstrap/ui-bootstrap
 //= require angular-bootstrap/ui-bootstrap-tpls
 //= require bootstrap-datepicker/js/bootstrap-datepicker

@@ -1,26 +1,27 @@
 
-<h1 class="text-center col-md-6 col-md-offset-3">Create New Project</h1>
+<h3 class="text-center col-md-6 col-md-offset-3">Create New Project</h3>
 
 <form novalidate ng-submit="addProject(newProject)" class="create-project">
 	<section class="col-md-10 col-md-offset-1 custom-form">
 		<div class="form-group row">		
 			<label for="newcompany" class="col-md-3 col-md-offset-3 text-right form-custom-label">Company</label>
 			<select class="selectpicker show-tick" ng-model="newProject.company" ng-options="company.name for company in companies track by company.id" data-size="5" title="Select Company" data-live-search="true" id="newcompany">
-				 <!-- <option ng-if="false"></option> -->
+				 <option class="hidden"></option>
+
 			</select>
 		</div>
 
 		<div class="form-group row">		
 			<label for="newuser" class="col-md-3 col-md-offset-3 text-right form-custom-label">Assigned to</label>
 			<select class="selectpicker show-tick" ng-model="newProject.user" ng-options="user.name for user in users track by user.id" data-size="5" title="Select Asignee" id="newuser">
-				 <!-- <option ng-repeat="false"></option>  -->
+				 <option class="hidden"></option>
 			</select>
 		</div>
 
 		<div class="form-group row">		
 			<label for="newsupplier" class="col-md-3 col-md-offset-3 text-right form-custom-label">Principal</label>
 			<select class="selectpicker show-tick" ng-model="newProject.supplier" ng-options="supplier.name for supplier in suppliers track by supplier.id" data-size="5" title="Select Supplier" id="supplier">
-				<!-- <option ng-if="false"></option>  -->
+				<option class="hidden"></option>
 			</select>
 		</div>
 

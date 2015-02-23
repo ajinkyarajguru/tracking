@@ -35,8 +35,9 @@ app.config(['$routeProvider', '$locationProvider',
         }).when('/companies/new', {
             templateUrl: 'company.new.html',
             controller: 'CompanyFormController'
-        }).when('/projects/tasks/create',{
-            templateUrl: 'project.tasks.create.html'
+        }).when('/projects/:projectId/tasks/create',{
+            templateUrl: 'project.tasks.create.html',
+            controller: 'CreateProjectTasksController'
         })
 
         ;//.otherwise({ redirectTo: '/users' });

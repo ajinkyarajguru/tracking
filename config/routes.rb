@@ -61,13 +61,17 @@ Rails.application.routes.draw do
 
 
   namespace :api, defaults: {format: :json} do
-    resources :users
+    resources :users do
+      resources :tasks
+    end
     resources :projects
     resources :companies
     resources :suppliers
 
     delete '/users/:id', to: 'users#destroy', as: "delete_user"
     delete '/projects/:id', to: 'projects#destroy', as: "delete_project"
+
+    
 
   end
 

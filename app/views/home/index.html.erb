@@ -1,5 +1,36 @@
 <div ng-app="tracking">
-  <div class="view-container">
-    <div ng-view class="view-frame animate-view"></div>
+ <div class="custom-page-header">
+ <ul class="nav nav-pills menu col-md-4 col-md-offset-1">
+  <li role="presentation"><a href="/" class="with-glyphicon"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+  
+  <li role="presentation" class="dropdown">
+    <a class="dropdown-toggle with-glyphicon" data-toggle="dropdown" href="#" role="button" aria-expanded="false"><span class="glyphicon glyphicon-briefcase"></span>
+      Project<span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+      <li><a href="/projects/new">Create Project</a></li>
+      <li><a href="/projects">List Projects</a></li>
+    </ul>
+  </li>
+  <li role="presentation" class="dropdown">
+    <a class="dropdown-toggle with-glyphicon" data-toggle="dropdown" href="#" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>
+      Users<span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+      <li><a href="/users/new">Create User</a></li>
+      <li><a href="/users">List Users</a></li>
+    </ul>
+  </li>
+
+</ul>
+
+ <ul class="nav nav-pills user col-md-2 col-md-offset-5">
+  <li role="presentation"><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+  <li role="presentation"><a href="#"><span class="glyphicon glyphicon-cog"></span></a></li>
+  <li role="presentation"><a href="#"><span class="glyphicon glyphicon-off"></span></a></li>
+</ul></div>
+  <div class="view-container row" style="margin:0px">
+    <div ng-view class="view-frame animate-view col-md-10"></div>
+    <div class="col-md-2" style="padding-top:80px">This is the task panel</div>
   </div>
 </div>

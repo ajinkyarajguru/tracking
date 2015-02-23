@@ -8,6 +8,12 @@ class Project < ActiveRecord::Base
 	validates :start_on, presence: true
 	validates :planned_end, presence: true
 
+	after_create :create_tasks_for_projects
+
+	def create_tasks_for_projects
+		Task.create(user_id: self.user_id)
+	end
+
 	def start_date_before_end_date
 		if start_on>planned_end
 			errors.add(:start_on,"Start Date cannot be after planned end")
