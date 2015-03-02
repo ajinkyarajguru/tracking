@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -70,6 +72,10 @@ Rails.application.routes.draw do
 
     delete '/users/:id', to: 'users#destroy', as: "delete_user"
     delete '/projects/:id', to: 'projects#destroy', as: "delete_project"
+
+    get    'login'   => 'sessions#new'
+    post   'login'   => 'sessions#login'
+    delete 'logout'  => 'sessions#logout'
 
     
 

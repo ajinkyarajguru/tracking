@@ -84,7 +84,7 @@ UserControllers.controller('UserFormController', ['$scope', 'User',
         $scope.update = function(user) {
             newUser = new User();
             newUser.user = user;
-            newUser.$save(function(success,b,c,d) {
+            newUser.$save(function(success) {
                 console.log(success)
             },function(error){
                 console.log(error)

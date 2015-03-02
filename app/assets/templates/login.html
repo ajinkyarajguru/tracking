@@ -1,14 +1,15 @@
-<h3 class="text-center col-md-6 col-md-offset-3">Login</h3>
+<h3 class="text-center form-label">Login</h3>
 
-<form novalidate class="css-form" ng-submit="update(user)">
+<form novalidate class="css-form" ng-submit="login(credentials)">
+<div ng-if="currentUser">{{currentUser.name}}</div>
 	<section class="col-md-10 col-md-offset-1 custom-form">
 		<div class="form-group row">
 			<label class="col-md-3 col-md-offset-2 text-right form-custom-label">Username</label>
-			<input type="text" class="form-control col-md-2" ng-model="user.name" />
+			<input type="text" class="custom-form-control form-control col-md-2" ng-model="credentials.name" />
 		</div>
 		<div class="form-group row">
 			<label class="col-md-3 col-md-offset-2 text-right form-custom-label">Password</label>
-			<input type="password" class="form-control col-md-2" ng-model="user.name" />
+			<input type="password" class="custom-form-control form-control col-md-2" ng-model="credentials.password" />
 		</div>
 		<div class="row">
 			<input type="button" ng-click="reset()" value="Reset" class="btn btn-default  col-md-1 col-md-offset-3"/>

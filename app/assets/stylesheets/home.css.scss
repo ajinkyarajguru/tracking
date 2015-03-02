@@ -1,40 +1,66 @@
-// Place all the styles related to the home controller here.
+	// Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.custom-page-header{
-	
+.application-container{
+	background: url(../images/seamless_paper_texture.png);
+}
 
-	.icon{
+
+
+.view-container.row{
+	margin:0px;
+	padding-bottom:100px;
+	.task-panel{
+		padding-top:70px
+	}
+}
+
+.form-label{
+	color:#FFFFFF;
+	text-shadow:1px 2px #666666;
+}
+
+.custom-page-header.row{
 	
+	background-color:#50AA80;
+	margin-left:0px;
+	margin-right:0px;
+
+	.nav{
+		.open{
+			>a{
+				background-color:#259060;
+			}
+		}
+		>li{
+			>a{
+				color:#EEEEEE;
+
+			}
+			>a:hover,>a:focus,a:active{
+			 background-color:#259060;
+			}
+			>a.with-glyphicon{
+				.glyphicon{
+					margin-right:10px
+				}
+			}
+		}
 	}
 
 	.menu{
-		margin-top:10px;
+		margin-top:15px;
 	}
 
 	.user{
 		margin-top:15px;
-	}
-
-	.with-glyphicon{
-		.glyphicon{
-			margin-right:10px
-		}
+		margin-bottom:10px
 	}
 
 	.caret{
 		margin-left:5px
 	}
-}
-
-.view-container{
-
-}
-
-.row .no-margin{
-	margin-left:0 px;
-	margin-right:0 px;
 }
 
 .list-unstyled .well h4.h4{
@@ -45,6 +71,7 @@
 
 
 .custom-form{
+
 	.custom-form-control{
 		width:auto;
 	}
@@ -61,8 +88,8 @@
 
 .custom-form{
 	margin-top:20px;
-	padding:20px;
-	background-color: #e3e3e3;
+	padding:30px 20px;
+	background-color: #FFFFFF;
 	border-radius: 5px;
 }
 
@@ -113,6 +140,12 @@
 		margin-bottom:0px;
 	}
 }
+
+.tasks{
+
+	margin-top:80px;
+}
+
 
 .slide-animate.ng-enter, .slide-animate.ng-leave{
  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 2s;

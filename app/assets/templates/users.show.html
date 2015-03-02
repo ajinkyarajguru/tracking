@@ -1,11 +1,12 @@
 
   <h3 class="text-center">Ajinkya Industrial Suppliers</h3>
 
-<section class="" ng-if="projects">
-  <h1 class="text-center h2">{{user.name}}</h1>
+<section class="custom-form" ng-if="projects">
+  <h2 class="text-center h2">{{user.name}}</h2>
+  <input ng-model="search.$" type="search" class="col-md-2 col-md-offset-8 form-control custom-form-control"/>
   <ul class="list-unstyled">
     
-    <li class="project-header">
+    <li class="project-header row">
       <section class="col-md-10 col-md-offset-1" >
 
         <h5 class="h5 col-md-2" style="margin-top: 0; "><a href="#" ng-click="order('company');" class="">Company</a>
@@ -19,7 +20,7 @@
       </section>
     </li>
     
-    <li ng-repeat="row in projects" class="user-projects" >
+    <li ng-repeat="row in projects|filter:search" class="user-projects row" >
       <section class=" col-md-10 col-md-offset-1">
         <h5 class="h5 col-md-2" style="margin-top: 0; padding-top:8px"><a href="#">{{row.company}}</a></h5>
         <h5 class="h5 col-md-1" style="margin-top: 0; padding-top:8px"><a href="#">{{row.supplier}}</a></h5>

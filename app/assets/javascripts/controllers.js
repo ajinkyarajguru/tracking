@@ -10,16 +10,20 @@ controllers = angular.module('controllers', ['UserControllers']).factory('User',
     return $resource('/api/suppliers/:supplierId');
 });
 
-controllers.controller('LoginController', ['$scope', function ($scope) {
-        
-}]);
 
 controllers.controller('CreateProjectTasksController', ['$scope','$routeParams', 'Project',
  function ($scope, $routeParams, Project) {
     
     $scope.id = $routeParams.projectId
     Project.get({projectId:$scope.id}).$promise.then(function(result){
+        console.log(result);
+    });
+}]);
 
+controllers.controller('CompanyIndexController', ['$scope','Company', function($scope,Company){
+    
+    Company.query().$promise.then(function(result){
+        $scope.companies=result;
     });
 }]);
 
@@ -113,3 +117,4 @@ controllers.controller('CompanyFormController', ['$scope', 'Company',
 
     }
 ]);
+

@@ -1,5 +1,6 @@
 json.id   @user.id
 json.name @user.name
+json.role @user.role
 
 json.projects @user.projects do |project|
 	json.project_id project.id
