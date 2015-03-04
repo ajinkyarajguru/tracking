@@ -12,25 +12,33 @@ authentication.constant('AUTH_EVENTS', {
 authentication.constant('USER_ROLES', {
   all: '*',
   admin: 'admin',
-  editor: 'editor',
-  guest: 'guest'
+  self: 'self',
+  sales: 'sales'
 });
 
-authentication.controller('LoginController',['$scope','$rootScope','AUTH_EVENTS','AuthService',function($scope,$rootScope,AUTH_EVENTS,AuthService){
+authentication.controller('LoginController',['$scope','$location','$rootScope','AUTH_EVENTS','AuthService',function($scope,$location,$rootScope,AUTH_EVENTS,AuthService){
    $scope.login=function(credentials){
       AuthService.login(credentials).then(function (result) {
+
+      if(result.success){
+        $scope.setCurrentUser(result.user);
+        $scope.addTimedAlert(result.message,"success",3000);
         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-        console.log(result)
-        $scope.setCurrentUser(result);
-    }, function () {
-      $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-    });
+        $location.path("/users/"+result.user.id);
+
+      }else{
+        $scope.addTimedAlert(result.message,"danger",3000);
+        $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+      }
+    }, function () {});
+
    };
 
    $scope.logout=function(){
     AuthService.logout();
     $scope.setCurrentUser=null;
    };
+   
 }]);
 
 authentication.factory('AuthService', function ($http, Session) {
@@ -41,14 +49,20 @@ authentication.factory('AuthService', function ($http, Session) {
       .post('/api/login', {session:credentials})
       .then(function (res) {
 
-        user={};
-        if(res.data.status){
-
-          user=res.data.user;
+        loginStatus={};
+        if(res.data.success){
+          loginStatus.success=true;
+          loginStatus.user=res.data.user;
           current_session=res.data.session;
           Session.create(current_session.session_id,current_session.user_id,current_session.user_role);        
+        }else{
+          loginStatus.success=false;
         }
-        return user;
+        loginStatus.message=res.data.message;
+        
+        return loginStatus;
+      },function(){
+        return false
       });
   };
 

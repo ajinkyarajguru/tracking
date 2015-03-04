@@ -1,12 +1,12 @@
 
-<h3 class="users-header text-center col-md-6 col-md-offset-3 form-label">Ajinkya Industrial Suppliers</h3>
+<h3 class="users-header text-center col-md-6 col-md-offset-3 form-label" style="margin-bottom:40px">List Companies</h3>
 
-
+<input ng-model="search.name" type="search" class="col-md-3 form-control custom-form-control" style="margin-top:20px; width:auto"/>
 <section class="users" ng-if="companies">
   
   <ul class="list-unstyled">
-    <li ng-repeat="company in companies">
-      <section class="well well-sm col-md-10 col-md-offset-1">
+    <li ng-repeat="company in companies|filter:search">
+      <section class="well well-sm col-md-12">
         <h4 class="h4 col-md-5 user-field"><a class="user-name" ng-href="./companies/{{company.id}}">{{company.name}}</a></h4>
         <h5 class="h5 col-md-1 user-active"><span class="pull-left"></span></h5>
         

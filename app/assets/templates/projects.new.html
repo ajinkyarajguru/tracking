@@ -2,7 +2,7 @@
 <h3 class="text-center col-md-6 col-md-offset-3 form-label">Create New Project</h3>
 
 <form novalidate ng-submit="addProject(newProject)" class="create-project">
-	<section class="col-md-10 col-md-offset-1 custom-form">
+	<section class="col-md-12 custom-form">
 		<div class="form-group row">		
 			<label for="newcompany" class="col-md-3 col-md-offset-3 text-right form-custom-label">Company</label>
 			<select class="selectpicker show-tick" ng-model="newProject.company" ng-options="company.name for company in companies track by company.id" data-size="5" title="Select Company" data-live-search="true" id="newcompany">

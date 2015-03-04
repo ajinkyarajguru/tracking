@@ -39,7 +39,10 @@
     </div>
     <div class="view-container row">
       <div ng-view class="view-frame animate-view col-md-9"></div>
-      <div class="col-md-2 task-panel"></div>
+      <div class="col-md-3 task-panel"></div>
+      <div style="position:fixed;right:15px;top:75px" class="col-md-3">
+       <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" class="alert-messages " style="">{{alert.msg}}</alert>
+      </div>
     </div>
   </div>
 </div>

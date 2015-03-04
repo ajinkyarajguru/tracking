@@ -8,7 +8,7 @@ UserControllers.factory('User', function($resource) {
     });
 });
 
-UserControllers.controller("UserController", ['$scope', '$routeParams', 'User', '$filter','Project',
+UserControllers.controller("UserShowController", ['$scope', '$routeParams', 'User', '$filter','Project',
     function($scope, $routeParams, User, $filter, Project) {
 
         var orderBy = $filter('orderBy');
@@ -63,7 +63,7 @@ UserControllers.controller("UserController", ['$scope', '$routeParams', 'User', 
 
 
 
-UserControllers.controller("UsersController", ['$scope', 'User',
+UserControllers.controller("UserIndexController", ['$scope', 'User',
     function($scope, User) {
 
         User.query().$promise.then(function(result) {
@@ -74,7 +74,7 @@ UserControllers.controller("UsersController", ['$scope', 'User',
 ]);
 
 
-UserControllers.controller('UserFormController', ['$scope', 'User',
+UserControllers.controller('UserNewController', ['$scope', 'User',
     function($scope, User) {
 
         $scope.master = {};

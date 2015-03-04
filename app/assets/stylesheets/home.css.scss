@@ -11,8 +11,15 @@
 .view-container.row{
 	margin:0px;
 	padding-bottom:100px;
+	padding-left:20px;
+	padding-right:20px;
 	.task-panel{
-		padding-top:70px
+		
+		padding:20px;
+		display: none;
+		margin-top:75px;
+		background-color: #FFFFFF;
+		border-radius: 5px;
 	}
 }
 
@@ -72,8 +79,20 @@
 
 .custom-form{
 
+	margin-top:20px;
+	padding:30px 20px;
+	background-color: #FFFFFF;
+	border-radius: 5px;
+
 	.custom-form-control{
 		width:auto;
+	}
+
+	.username{
+		margin-bottom:40px;
+	}
+	.custom-form-control.search{
+		margin-top:20px;
 	}
 }
 
@@ -86,12 +105,6 @@
 	margin-bottom:20px
 }
 
-.custom-form{
-	margin-top:20px;
-	padding:30px 20px;
-	background-color: #FFFFFF;
-	border-radius: 5px;
-}
 
 .form-control.datepicker{
 	padding:6px 12px;

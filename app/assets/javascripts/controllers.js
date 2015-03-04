@@ -8,6 +8,8 @@ controllers = angular.module('controllers', ['UserControllers']).factory('User',
     return $resource('/api/companies/:companyId');
 }).factory('Supplier', function($resource) {
     return $resource('/api/suppliers/:supplierId');
+}).factory('Task',function($resource){
+    return $resource('/api/tasks/taskId');
 });
 
 
@@ -16,7 +18,7 @@ controllers.controller('CreateProjectTasksController', ['$scope','$routeParams',
     
     $scope.id = $routeParams.projectId
     Project.get({projectId:$scope.id}).$promise.then(function(result){
-        console.log(result);
+        
     });
 }]);
 
@@ -28,7 +30,21 @@ controllers.controller('CompanyIndexController', ['$scope','Company', function($
 }]);
 
 
-controllers.controller('ProjectsFormController', ['$scope', '$location','$timeout', 'User', 'Company', 'Supplier', 'Project',
+controllers.controller('ProjectShowController', ['$scope','Project','User', function($scope,Project,User){
+    
+}]);
+
+controllers.controller('ProjectIndexController', ['$scope','Project','User', function($scope,Project,User){
+    
+}]);
+
+controllers.controller('TasksNewController', ['$scope','Task','Company','User', function($scope,Task,Company,User){
+    
+}]);
+
+
+
+controllers.controller('ProjectNewController', ['$scope', '$location','$timeout', 'User', 'Company', 'Supplier', 'Project',
     function($scope, $location, $timeout, User, Company, Supplier, Project) {
 
         $scope.addProject = function(project) {
@@ -78,7 +94,7 @@ controllers.controller('ProjectsFormController', ['$scope', '$location','$timeou
     }
 ]);
 
-controllers.controller('SupplierFormController', ['$scope', 'Supplier',
+controllers.controller('SupplierNewController', ['$scope', 'Supplier',
     function($scope, Supplier) {
 
         $scope.master = {};
@@ -98,7 +114,7 @@ controllers.controller('SupplierFormController', ['$scope', 'Supplier',
     }
 ]);
 
-controllers.controller('CompanyFormController', ['$scope', 'Company',
+controllers.controller('CompanyNewController', ['$scope', 'Company',
     function($scope, Company) {
 
         $scope.master = {};

@@ -1,5 +1,6 @@
-json.status session[:status]
+json.success true
 json.session session
-json.message flash[:message]
 json.user current_user
+json.message flash[:success]
+
 

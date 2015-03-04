@@ -1,13 +1,13 @@
 
-  <h3 class="text-center">Ajinkya Industrial Suppliers</h3>
+<h3 class="text-center form-label">Overview</h3>
 
-<section class="custom-form" ng-if="projects">
-  <h2 class="text-center h2">{{user.name}}</h2>
-  <input ng-model="search.$" type="search" class="col-md-2 col-md-offset-8 form-control custom-form-control"/>
+<section class="custom-form col-md-12" ng-if="projects">
+  <h3 class="text-center h3 col-md-9 username">{{user.name}}</h3>
+  <input ng-model="search.$" type="search" class="col-md-2 form-control custom-form-control search" style="margin-bottom:30px"/>
   <ul class="list-unstyled">
     
     <li class="project-header row">
-      <section class="col-md-10 col-md-offset-1" >
+      <section class="col-md-12" >
 
         <h5 class="h5 col-md-2" style="margin-top: 0; "><a href="#" ng-click="order('company');" class="">Company</a>
         </h5>
@@ -15,16 +15,16 @@
         <h5 class="h5 col-md-2 text-right" style="margin-top: 0; white-space: no-wrap; text-overflow: ellipsis; overflow: hidden "><a href="#" ng-click="order('projected_revenue');">Projected Revenue</a></h5>
         <h5 class="h5 col-md-1 text-center" style="margin-top: 0; "><a href="#" ng-click="order('daystogo');">Days</a></h5>
         <h5 class="h5 col-md-2 text-center" style="margin-top: 0; "><a href="#" ng-click="order('progress');">Progress</a></h5>
-        <div class="col-md-1 col-md-offset-4 text-right">
+        <div class="col-md-1 col-md-offset-2 text-right">
         </div>
       </section>
     </li>
     
     <li ng-repeat="row in projects|filter:search" class="user-projects row" >
-      <section class=" col-md-10 col-md-offset-1">
+      <section class="col-md-12">
         <h5 class="h5 col-md-2" style="margin-top: 0; padding-top:8px"><a href="#">{{row.company}}</a></h5>
         <h5 class="h5 col-md-1" style="margin-top: 0; padding-top:8px"><a href="#">{{row.supplier}}</a></h5>
-        <h5 class="h5 col-md-2 text-right" style="margin-top: 0; padding-top:8px">{{row.projected_revenue|rupee:"&#8377;"}}</h5>
+        <h5 class="h5 col-md-2 text-right" style="margin-top: 0; padding-top:8px">{{row.projected_revenue|removeNA : 0 : ""|rupee:"&#8377;"}}</h5>
         <h5 class="h5 col-md-1 text-center" style="margin-top: 0; padding-top:8px">{{row.daystogo}}</h5>
         <h5 class="h5 col-md-2 text-center" style="margin-top: 0; padding-top:5px"><progressbar class="active custom-progress" value="row.progress" max="5" type="getType(row.progress)"><i></i></progressbar></h5>
         

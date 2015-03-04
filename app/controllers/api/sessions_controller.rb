@@ -10,11 +10,10 @@ module Api
       
       if user && user.authenticate(params[:session][:password])	  			
       		log_in(user)
-          session[:status]=true
           flash[:success]="Logged in"
     	else          
           flash[:error]="Invalid username or password"
-          session[:status]=false
+          render 'failed'
     	end
 		end
 		def logout

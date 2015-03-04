@@ -6,7 +6,7 @@
   
   <ul class="list-unstyled">
     <li ng-repeat="user in users">
-      <section class="well well-sm col-md-10 col-md-offset-1">
+      <section class="well well-sm col-md-12">
         <h4 class="h4 col-md-2 user-field"><a class="user-name" ng-href="./users/{{user.id}}">{{user.name}}</a></h4>
         <h5 class="h5 col-md-1 user-active"><span class="pull-left">{{user.active_projects|removeNA : 0 : ""}}</span><span class="pull-right">{{user.all_projects|removeNA : 0 : ""}}</span></h5>
         
