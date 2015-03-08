@@ -41,7 +41,7 @@ authentication.controller('LoginController',['$scope','$location','$rootScope','
    
 }]);
 
-authentication.factory('AuthService', function ($http, Session) {
+authentication.factory('AuthService', function ($http, Session,$cookies) {
   var authService = {};
 
   authService.login = function (credentials) {
@@ -54,7 +54,7 @@ authentication.factory('AuthService', function ($http, Session) {
           loginStatus.success=true;
           loginStatus.user=res.data.user;
           current_session=res.data.session;
-          Session.create(current_session.session_id,current_session.user_id,current_session.user_role);        
+          Session.create(current_session.session_id,current_session.user_id,current_session.user_role);                  
         }else{
           loginStatus.success=false;
         }
@@ -70,10 +70,12 @@ authentication.factory('AuthService', function ($http, Session) {
     return $http
       .delete('/api/logout')
       .then(function (res) {        
+  
       });
   };
  
-  authService.isAuthenticated = function () {
+  authService.isAuthenticated = function () {    
+  
     return !!Session.userId;
   };
  

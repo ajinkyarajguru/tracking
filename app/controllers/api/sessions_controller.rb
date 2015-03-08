@@ -17,7 +17,7 @@ module Api
     	end
 		end
 		def logout
-			log_out() 				
+			log_out 				
 		end
 	end
 end

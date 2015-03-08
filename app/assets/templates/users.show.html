@@ -1,12 +1,12 @@
 
 <h3 class="text-center form-label">Overview</h3>
 
-<section class="custom-form col-md-12" ng-if="projects">
+<section class="custom-form col-md-12" ng-if="projects.length>0">
   <h3 class="text-center h3 col-md-9 username">{{user.name}}</h3>
   <input ng-model="search.$" type="search" class="col-md-2 form-control custom-form-control search" style="margin-bottom:30px"/>
   <ul class="list-unstyled">
     
-    <li class="project-header row">
+    <li class="project-header row" ng-if="projects">
       <section class="col-md-12" >
 
         <h5 class="h5 col-md-2" style="margin-top: 0; "><a href="#" ng-click="order('company');" class="">Company</a>

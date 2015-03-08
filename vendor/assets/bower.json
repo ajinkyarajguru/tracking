@@ -6,6 +6,8 @@
     "angular-chart": "latest",
     "bootstrap-sass": "latest",
     "angular-bootstrap": "latest",
+    "angular-ui-switch": "latest",
+    "angular-cookies": "latest",
     "bootstrap-select": "latest",
     "bootstrap-datepicker": "latest",
     "angular-resource": "latest"

@@ -1,0 +1,49 @@
+
+<h3 class="text-center col-md-6 col-md-offset-3 form-label">Create New Task</h3>
+
+<form novalidate ng-submit="addTask(newTask)" class="create-task">
+	<section class="col-md-12 custom-form">
+		<div class="form-group row">		
+			<label for="newcompany" class="col-md-3 col-md-offset-3 text-right form-custom-label">Company</label>
+			<select class="selectpicker show-tick" ng-model="newTask.company" ng-options="company.name for company in companies track by company.id" data-size="5" title="Select Company" data-live-search="true" id="newcompany">
+				 <option class="hidden"></option>
+
+			</select>
+		</div>
+
+		<div class="form-group row">		
+			<label for="newuser" class="col-md-3 col-md-offset-3 text-right form-custom-label">Assigned to</label>
+			<select class="selectpicker show-tick" ng-model="newTask.user" ng-options="user.name for user in users track by user.id" data-size="5" title="Select Asignee" id="newuser">
+				 <option class="hidden"></option>
+			</select>
+		</div>
+
+		<div class="form-group row">
+			<label for="deadline" class="col-md-3 col-md-offset-3 text-right form-custom-label">Deadline</label>
+			<input type="text" class="custom-form-control form-control col-md-5 datepicker" id="deadline" placeholder="Deadline" ng-model="newTask.deadline">
+		</div>
+
+		<div class="form-group row">
+		<label for="category" class="col-md-3 col-md-offset-3 text-right form-custom-label">Category</label>
+		<select class="selectpicker" id="category" ng-model="newTask.category" title="Select Category">
+			<option class="hidden"></option>
+			<option ng-repeat="category in categories">{{category}}</option>
+			
+		</select>
+		</div>
+		<div class="form-group row">
+			<label for="priority" class="text-right form-custom-label col-md-3 col-md-offset-3">Priority</label>
+			 <switch id="enabled" name="enabled" ng-model="newTask.priority" class="green"></switch>
+		</div> 
+
+		<div class="form-group row">
+			<label for="description" class="text-right form-custom-label col-md-3 col-md-offset-3">Description</label>
+			 <textarea class="form-control custom-form-control" style="resize:vertical" ng-model="newTask.description"></textarea>
+		</div> 
+
+		<div class="row">
+			<button type="button" class="btn btn-default col-md-1 col-md-offset-1" >Reset</button>
+			<button type="submit" class="btn btn-success col-md-1 col-md-offset-7" >Submit</button>
+		</div>
+	</section>
+</form>

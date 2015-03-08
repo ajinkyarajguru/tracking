@@ -1,14 +1,17 @@
-var app = angular.module('tracking', ['templates', 'ngRoute',  'ngResource', 'controllers','authentication','ui.bootstrap','angularChart']);
+var app = angular.module('tracking', ['templates', 'ngRoute', 'ngResource', 'ngCookies', 'controllers','authentication','ui.bootstrap','angularChart']);
 
- 
+app.constant('TASK_CATEGORIES',{
+    visit:"Visit",
+    trial:"Trial",
+    call:"Call"
+}); 
 
 app.config(['$routeProvider', '$locationProvider','USER_ROLES',
     function($routeProvider, $locationProvider,USER_ROLES) {
 
         $routeProvider.when('/login', {
             templateUrl: 'login.html',
-            controller: 'LoginController',
-            
+            controller: 'LoginController',            
         }).when('/users/new', {
             templateUrl: 'users.new.html',
             controller: 'UserNewController',
@@ -64,7 +67,21 @@ app.config(['$routeProvider', '$locationProvider','USER_ROLES',
             data:{
                 authorizedRoles:[USER_ROLES.admin]
             }
-        })/*.when('/projects/:projectId/tasks/create',{
+        }).when('/tasks/new',{
+            templateUrl:'tasks.new.html',
+            controller:'TaskNewController',
+            data:{
+                authorizedRoles:[USER_ROLES.admin,USER_ROLES.sales]   
+            }
+        }).when('/tasks/:taskId',{
+            templateUrl:'tasks.show.html',
+            controller:'TaskShowController',
+            data:{
+                authorizedRoles:[USER_ROLES.admin,USER_ROLES.sales]   
+            }
+        })
+
+        /*.when('/projects/:projectId/tasks/create',{
             templateUrl: 'project.tasks.create.html',
             controller: 'CreateProjectTasksController',
             data:{
@@ -123,6 +140,8 @@ app.controller('ApplicationController',['$scope','$timeout','USER_ROLES','AuthSe
 
 }]);
 
+
+
 app.filter("removeNA",function(){
     return function(input, nullValue, replacement){
         return (input===nullValue) ? replacement : input
@@ -163,13 +182,14 @@ app.filter("rupee",function(){
     }
 });
 
-app.run(function ($rootScope, $location, Session,USER_ROLES,AUTH_EVENTS, AuthService) {
+app.run(function ($rootScope, $location, $cookies, Session,USER_ROLES,AUTH_EVENTS, AuthService) {
 
   $(".application-container").height($(window).innerHeight())
 
   $rootScope.$on('$routeChangeStart', function (event, next) {
      if(next.templateUrl!="login.html"){
         var authorizedRoles = next.data.authorizedRoles;
+       
         /*var userAuthorized = true;
         var isRestricted = next.data.restricted || false
 
@@ -178,12 +198,14 @@ app.run(function ($rootScope, $location, Session,USER_ROLES,AUTH_EVENTS, AuthSer
             userAuthorized = isRestricted ? (next.pathParams.userId==Session.userId) : true;
         }*/
 
+
+
         if (!AuthService.isAuthorized(authorizedRoles)) {
           event.preventDefault();
           if (AuthService.isAuthenticated()) {                
             $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
           } else {
-            // user is not logged in
+            
             $location.path("/login")
             $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
           }

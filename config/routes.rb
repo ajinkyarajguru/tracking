@@ -63,12 +63,11 @@ Rails.application.routes.draw do
 
 
   namespace :api, defaults: {format: :json} do
-    resources :users do
-      resources :tasks
-    end
+    resources :users 
     resources :projects
     resources :companies
     resources :suppliers
+    resources :tasks
 
     delete '/users/:id', to: 'users#destroy', as: "delete_user"
     delete '/projects/:id', to: 'projects#destroy', as: "delete_project"
@@ -77,7 +76,7 @@ Rails.application.routes.draw do
     post   'login'   => 'sessions#login'
     delete 'logout'  => 'sessions#logout'
 
-    
+    get '/users/:id/tasks', to: 'tasks#userTasks'
 
   end
 

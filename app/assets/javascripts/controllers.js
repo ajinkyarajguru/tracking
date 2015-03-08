@@ -1,4 +1,4 @@
-controllers = angular.module('controllers', ['UserControllers']).factory('User', function($resource) {
+controllers = angular.module('controllers', ['UserControllers','uiSwitch']).factory('User', function($resource) {
     return $resource('/api/users/:userId');
 }).factory('Project', function($resource) {
     return $resource('/api/projects/:projectId',null,{
@@ -9,8 +9,22 @@ controllers = angular.module('controllers', ['UserControllers']).factory('User',
 }).factory('Supplier', function($resource) {
     return $resource('/api/suppliers/:supplierId');
 }).factory('Task',function($resource){
-    return $resource('/api/tasks/taskId');
+    return $resource('/api/tasks/:taskId',{},{
+        'get':{method:'GET',isArray:true}
+    });
 });
+
+controllers.controller('TaskPanelController', ['$scope','$rootScope','Task','TASK_CATEGORIES', function($scope,$rootScope,Task,TASK_CATEGORIES){
+
+    
+
+    $rootScope.$on("auth-login-success",function(){
+        Task.get({user_id:$scope.currentUser.id,completed:'f'}).$promise.then(function(result){
+            $scope.tasks=result;            
+        });
+    });
+    
+}]);
 
 
 controllers.controller('CreateProjectTasksController', ['$scope','$routeParams', 'Project',
@@ -38,8 +52,54 @@ controllers.controller('ProjectIndexController', ['$scope','Project','User', fun
     
 }]);
 
-controllers.controller('TasksNewController', ['$scope','Task','Company','User', function($scope,Task,Company,User){
+controllers.controller('TaskNewController', ['$scope','$timeout','Task','Company','User','TASK_CATEGORIES', function($scope,$timeout,Task,Company,User,TASK_CATEGORIES){
     
+    var categories=new Array();
+    for(key in TASK_CATEGORIES){
+        categories.push(TASK_CATEGORIES[key]);
+    }
+
+    $scope.categories=categories;
+
+
+    $scope.addTask = function(task) {
+            console.log(task)
+
+            newTask = new Task();
+            newTask.user_id = task.user.id;
+            newTask.category = task.category;
+            newTask.company_id = task.company.id;
+            newTask.priority = task.priority;
+            newTask.deadline = task.deadline;
+            newTask.description = task.description;
+            
+            newTask.$save(function(result) {
+                
+            });
+        };
+    
+    Company.query().$promise.then(function(companies) {
+            $scope.companies = companies;
+            console.log($scope.companies);
+            $timeout(function(){
+                $(".selectpicker").selectpicker('refresh');
+            });
+        });    
+
+    User.query().$promise.then(function(users) {
+            $scope.users = users;
+           
+            $timeout(function(){
+                $(".selectpicker").selectpicker('refresh');
+            });
+        });
+
+    $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd'
+    });
+
+    $(".selectpicker").selectpicker();
+
 }]);
 
 
@@ -48,7 +108,7 @@ controllers.controller('ProjectNewController', ['$scope', '$location','$timeout'
     function($scope, $location, $timeout, User, Company, Supplier, Project) {
 
         $scope.addProject = function(project) {
-            console.log(project.company)
+            
             newProject = new Project();
             newProject.user_id = project.user.id;
             newProject.supplier_id = project.supplier.id;
@@ -58,7 +118,7 @@ controllers.controller('ProjectNewController', ['$scope', '$location','$timeout'
             newProject.planned_end = project.planned_end;
             
             newProject.$save(function(result) {
-                console.log(result);
+            
                     $location.path("/projects/"+result.id+"/tasks/create");
                 
             });
@@ -66,6 +126,7 @@ controllers.controller('ProjectNewController', ['$scope', '$location','$timeout'
 
         User.query().$promise.then(function(users) {
             $scope.users = users;
+       
             $timeout(function(){
                 $(".selectpicker").selectpicker('refresh');
             });
@@ -73,6 +134,7 @@ controllers.controller('ProjectNewController', ['$scope', '$location','$timeout'
 
         Supplier.query().$promise.then(function(suppliers) {
             $scope.suppliers = suppliers;
+       
             $timeout(function(){
                 $(".selectpicker").selectpicker('refresh');
             });

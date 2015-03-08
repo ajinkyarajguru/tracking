@@ -8,8 +8,11 @@ UserControllers.factory('User', function($resource) {
     });
 });
 
+
 UserControllers.controller("UserShowController", ['$scope', '$routeParams', 'User', '$filter','Project',
     function($scope, $routeParams, User, $filter, Project) {
+
+
 
         var orderBy = $filter('orderBy');
 
