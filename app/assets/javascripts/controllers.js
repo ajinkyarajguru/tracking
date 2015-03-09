@@ -10,19 +10,68 @@ controllers = angular.module('controllers', ['UserControllers','uiSwitch']).fact
     return $resource('/api/suppliers/:supplierId');
 }).factory('Task',function($resource){
     return $resource('/api/tasks/:taskId',{},{
-        'get':{method:'GET',isArray:true}
+        'get':{method:'GET',isArray:true},
+        'update':{method:'PUT'}
     });
 });
 
-controllers.controller('TaskPanelController', ['$scope','$rootScope','Task','TASK_CATEGORIES', function($scope,$rootScope,Task,TASK_CATEGORIES){
+controllers.controller('TaskPanelController', ['$scope','$rootScope','$filter','Task','TASK_CATEGORIES', function($scope,$rootScope,$filter,Task,TASK_CATEGORIES){
 
-    
+    $scope.toggleTaskPriority=function(task){
+        task.priority=!task.priority;
+        Task.update({taskId:task.id},task);
+    }
+
+    $scope.toggleTaskCompleted=function(task){
+        task.completed=task.completed;
+        Task.update({taskId:task.id},task);
+    }
+
+    var orderBy = $filter('orderBy');
 
     $rootScope.$on("auth-login-success",function(){
         Task.get({user_id:$scope.currentUser.id,completed:'f'}).$promise.then(function(result){
             $scope.tasks=result;            
         });
     });
+
+    $('.datepicker').datepicker({
+       format: 'yyyy-mm-dd'
+    });
+
+    $scope.order=function(){
+
+        var sorted=new Array();
+        var priority=new Array();
+        var unsorted=new Array();
+        var finalSort=new Array();
+        for(task in $scope.tasks){
+
+            if($scope.tasks[task].priority){
+                priority.push($scope.tasks[task]);
+            }else if($scope.tasks[task].days_to_deadline!=='no date'){
+                sorted.push($scope.tasks[task]);
+            }else{
+                unsorted.push($scope.tasks[task]);
+            }
+        }
+        console.log("sorted");
+        console.log(sorted);
+        console.log("priority");
+        console.log(priority);
+        console.log("unsorted");
+        console.log(unsorted);
+
+        sorted=orderBy(sorted,sorted.days_to_deadline,true);
+        console.log("sorted Final");
+        console.log(sorted);
+        priority=orderBy(priority,priority.days_to_deadline,true);
+        console.log("priorityFinal");
+        console.log(priority);
+
+        $scope.tasks=priority.concat(sorted).concat(unsorted);
+    }
+
     
 }]);
 
@@ -56,7 +105,7 @@ controllers.controller('TaskNewController', ['$scope','$timeout','Task','Company
     
     var categories=new Array();
     for(key in TASK_CATEGORIES){
-        categories.push(TASK_CATEGORIES[key]);
+        categories.push(key);
     }
 
     $scope.categories=categories;
@@ -67,7 +116,7 @@ controllers.controller('TaskNewController', ['$scope','$timeout','Task','Company
 
             newTask = new Task();
             newTask.user_id = task.user.id;
-            newTask.category = task.category;
+            newTask.category = TASK_CATEGORIES[task.category];
             newTask.company_id = task.company.id;
             newTask.priority = task.priority;
             newTask.deadline = task.deadline;
@@ -196,3 +245,8 @@ controllers.controller('CompanyNewController', ['$scope', 'Company',
     }
 ]);
 
+controllers.run(function(){
+        
+    $("#task-list").height($(window).innerHeight()-250);     
+        
+});

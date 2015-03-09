@@ -2,69 +2,187 @@
   <div ng-controller="ApplicationController">
     <div class="custom-page-header row">
       <ul class="nav nav-pills menu col-md-7 col-md-offset-1">
-        <li role="presentation"><a href="/users/{{currentUser.id}}" class="with-glyphicon"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+        <li role="presentation">
+          <a href="/users/{{currentUser.id}}" class="with-glyphicon">
+            <span class="glyphicon glyphicon-home">
+            </span>
+            Home
+          </a>
+        </li>
         <li role="presentation" class="dropdown">
-          <a class="dropdown-toggle with-glyphicon" data-toggle="dropdown" href="#" role="button" aria-expanded="false"><span class="glyphicon glyphicon-briefcase"></span>
-          Project<span class="caret"></span>
+          <a class="dropdown-toggle with-glyphicon" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+            <span class="glyphicon glyphicon-briefcase">
+            </span>
+            Project
+            <span class="caret">
+            </span>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="/projects/new">Create Project</a></li>
-            <li><a href="/projects">List Projects</a></li>
+            <li>
+              <a href="/projects/new">
+                Create Project
+              </a>
+            </li>
+            <li>
+              <a href="/projects">
+                List Projects
+              </a>
+            </li>
           </ul>
         </li>
         <li role="presentation" class="dropdown">
-          <a class="dropdown-toggle with-glyphicon" data-toggle="dropdown" href="#" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>
-          Users<span class="caret"></span>
-        </a>
+          <a class="dropdown-toggle with-glyphicon" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+            <span class="glyphicon glyphicon-user">
+            </span>
+            Users
+            <span class="caret">
+            </span>
+          </a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="/users/new">Create User</a></li>
-            <li><a href="/users">List Users</a></li>
+            <li>
+              <a href="/users/new">
+                Create User
+              </a>
+            </li>
+            <li>
+              <a href="/users">
+                List Users
+              </a>
+            </li>
           </ul>
         </li>
-        <li role="presentation"><a href="/suppliers/new" class="with-glyphicon"><span class="glyphicon glyphicon-import"></span>Supplier</a></li>
+        <li role="presentation">
+          <a href="/suppliers/new" class="with-glyphicon">
+            <span class="glyphicon glyphicon-import">
+            </span>
+            Supplier
+          </a>
+        </li>
         <li role="presentation" class="dropdown">
-          <a class="dropdown-toggle with-glyphicon" data-toggle="dropdown" href="#" role="button" aria-expanded="false"><span class="glyphicon glyphicon-export"></span>
-          Companies<span class="caret"></span>
-        </a>
+          <a class="dropdown-toggle with-glyphicon" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+            <span class="glyphicon glyphicon-export">
+            </span>
+            Companies
+            <span class="caret">
+            </span>
+          </a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="/companies/new">Create Company</a></li>
-            <li><a href="/companies">List Companies</a></li>
+            <li>
+              <a href="/companies/new">
+                Create Company
+              </a>
+            </li>
+            <li>
+              <a href="/companies">
+                List Companies
+              </a>
+            </li>
           </ul>
         </li>
-        <li role="presentation"><a href="/tasks/new" class="with-glyphicon"><span class="glyphicon glyphicon-list-alt"></span>Tasks</a></li>
+        <li role="presentation">
+          <a href="/tasks/new" class="with-glyphicon">
+            <span class="glyphicon glyphicon-list-alt">
+            </span>
+            Tasks
+          </a>
+        </li>
       </ul>
       <ul class="nav nav-pills user col-md-2 col-md-offset-2" ng-controller="LoginController">
-        <li role="presentation"><a href="#"><span class="glyphicon glyphicon-cog"></span></a></li>
-        <li role="presentation"><a href="#" ng-click="logout()"><span class="glyphicon glyphicon-off"></span></a></li>
+        <li role="presentation">
+          <a href="#">
+            <span class="glyphicon glyphicon-cog">
+            </span>
+          </a>
+        </li>
+        <li role="presentation">
+          <a href="#" ng-click="logout()">
+            <span class="glyphicon glyphicon-off">
+            </span>
+          </a>
+        </li>
       </ul>
     </div>
     <div class="view-container row">
-      <div ng-view class="view-frame animate-view col-md-9"></div>
+      <div ng-view class="view-frame animate-view col-md-9">
+      </div>
       <div class="col-md-3" ng-controller="TaskPanelController" id="tasks">
         <div class="task-panel col-md-12 row" ng-if="tasks">
           <div class="task-controls">
             <ul class="nav nav-pills">
-              <li role="presentation"><a href="#"><span class="glyphicon glyphicon-sort-by-attributes"></span></a></li>
-              <li role="presentation"><a href="#"><span class="glyphicon glyphicon-sort-by-attributes-alt"></span></a></li>
-              <li role="presentation"><a href="#"><span class="glyphicon glyphicon-plus"></span></a></li>
-              <li role="presentation"><a href="#"><span class="glyphicon glyphicon-trash"></span></a></li>
+              <li role="presentation">
+                <a href="#" ng-click="order()">
+                  <span class="glyphicon glyphicon-sort-by-attributes">
+                  </span>
+                </a>
+              </li>
+              <li role="presentation">
+                <a href="#">
+                  <span class="glyphicon glyphicon-sort-by-attributes-alt">
+                  </span>
+                </a>
+              </li>
+              <li role="presentation">
+                <a href="#">
+                  <span class="glyphicon glyphicon-plus">
+                  </span>
+                </a>
+              </li>
+              <li role="presentation">
+                <a href="#">
+                  <span class="glyphicon glyphicon-trash">
+                  </span>
+                </a>
+              </li>
             </ul>
           </div>
-          <div ng-repeat="task in tasks" class="task-item row">
-            <div class="col-md-9">
-                <h5 class="title col-md-12">{{task.description}}</h5>
-                <span class="label col-md-3 col-md-offset-1" ng-class="{'label-success':task.category=='Visit','label-danger':task.category=='Trial'}">{{task.category|uppercase}}</span>
-                <p class="subtitle text-muted col-md-8">{{task.company}}</p>
+          <form novalidate id="task-list">
+            <div ng-repeat="task in tasks" class="task-item row" ng-class="{completed:task.completed}">
+              <div class="priority" ng-class="{not:!task.priority}" ng-click="toggleTaskPriority(task)"><input type="checkbox" class="form-control custom-form-control pull-right priority-check" ng-model="task.priority"/></div>
+              <div class="col-md-9">
+                <h5 class="title col-md-12">
+                  {{task.description}}
+                </h5>
+                <span class="label col-md-3 col-md-offset-1 label-default" ng-class="{'label-success':task.category=='Visit','label-danger':task.category=='Trial'}">
+                  {{task.category|uppercase}}
+                </span>
+                <p class="subtitle text-muted col-md-8">
+                  {{task.company}}
+                </p>
+              </div>
+              <div class="col-md-3 text-right">
+                <div class="days-container text-right btn-group">
+                  <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span ng-if="task.days_to_deadline!='no date'" class="glyphicon" ng-class="{'glyphicon-ok':task.completed==true}">
+                      <span ng-if="!task.completed">{{task.days_to_deadline}}</span>
+                    </span>
+                    <span ng-if="task.days_to_deadline=='no date'" class="task-label glyphicon add-deadline" ng-class="{'glyphicon-ok':task.completed==true,'glyphicon-bell':task.completed==false}">
+                    </span>
+                  </button>
+                  <ul class="dropdown-menu pull-right" role="menu">
+                    <li class="text-center">
+                      <a href="#">
+                        <span class="glyphicon glyphicon-tasks"></span>
+                      </a>
+                    </li>
+                    <li class="text-center">
+                      <input type="text" class="datepicker form-control custom-form-control"/>
+                      <a href="#"><span class="glyphicon glyphicon-calendar"></span></a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="complete-container">
+                <span class="glyphicon glyphicon-">
+                  <input type="checkbox" class="form-control custom-form-control pull-right completed-task" ng-model="task.completed" ng-change="toggleTaskCompleted(task)"/>
+                </div>
+              </div>
             </div>
-            <div class="col-md-3">
-              <p class="days-container text-right"><span ng-if="task.days_to_deadline!='no date'">{{task.days_to_deadline}}</span><span ng-if="task.days_to_deadline=='no date'">Task</span></p>
-              <p class="complete-container"><input type="checkbox" class="form-control custom-form-control pull-right"/></p>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
       <div class="col-md-3 alert-window">
-       <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" class="alert-messages " style="">{{alert.msg}}</alert>
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" class="alert-messages " style="">
+          {{alert.msg}}
+        </alert>
       </div>
     </div>
   </div>

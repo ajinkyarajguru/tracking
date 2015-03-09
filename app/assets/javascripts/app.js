@@ -1,9 +1,16 @@
 var app = angular.module('tracking', ['templates', 'ngRoute', 'ngResource', 'ngCookies', 'controllers','authentication','ui.bootstrap','angularChart']);
 
 app.constant('TASK_CATEGORIES',{
-    visit:"Visit",
-    trial:"Trial",
-    call:"Call"
+    
+    "Payment":"Paymt",
+    "Order":"Order",
+    "Sample":"Sampl",
+    "Courtsey":"Court",
+    "Visit":"Visit",
+    "Trial":"Trial",
+    "Call":"Call",
+    "Dispatch":"dspch"
+
 }); 
 
 app.config(['$routeProvider', '$locationProvider','USER_ROLES',
@@ -184,8 +191,10 @@ app.filter("rupee",function(){
 
 app.run(function ($rootScope, $location, $cookies, Session,USER_ROLES,AUTH_EVENTS, AuthService) {
 
-  $(".application-container").height($(window).innerHeight())
-
+  setTimeout(function(){
+    $(".application-container").height($(window).innerHeight());
+  },100)
+  
   $rootScope.$on('$routeChangeStart', function (event, next) {
      if(next.templateUrl!="login.html"){
         var authorizedRoles = next.data.authorizedRoles;

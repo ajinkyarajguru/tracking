@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227071250) do
+ActiveRecord::Schema.define(version: 20150309110922) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20150227071250) do
 
   create_table "tasks", force: true do |t|
     t.string   "category"
-    t.boolean  "priority"
+    t.boolean  "priority",    default: false
     t.date     "deadline"
     t.integer  "user_id"
     t.integer  "company_id"
