@@ -6,3 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+	admin=User.create([{name:'Ajinkya Rajguru', username:'ajinkya', email:'ajinkya.a.rajguru@gmail.com', role:'admin', password: 'linkedpass', password_confirmation:"linkedpass"}]);
+
+	suppliers=Supplier.create([{name:'3M'},{name:'Norma'},{name:'Henkel'},{name:'Seco'}]);

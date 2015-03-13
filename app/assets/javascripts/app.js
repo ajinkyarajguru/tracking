@@ -1,17 +1,25 @@
 var app = angular.module('tracking', ['templates', 'ngRoute', 'ngResource', 'ngCookies', 'controllers','authentication','ui.bootstrap','angularChart']);
 
-app.constant('TASK_CATEGORIES',{
+app.constant('TASK_CATEGORIES',[
     
-    "Payment":"Paymt",
-    "Order":"Order",
-    "Sample":"Sampl",
-    "Courtsey":"Court",
-    "Visit":"Visit",
-    "Trial":"Trial",
-    "Call":"Call",
-    "Dispatch":"dspch"
+    {name:"Payment",code:"Paymt",class:"",verb:"sent"},
+    {name:"Order",code:"Order",class:"",verb:"received"},
+    {name:"Sample",code:"SAMPL",class:"",verb:"sent"},
+    {name:"Courtsey",code:"Court",class:"",verb:"called"},
+    {name:"Trial",code:"trial",class:"",verb:"conducted"},
+    {name:"Call",code:"Call",class:"",verb:"called"},
+    {name:"Dispatch",code:"DSPCH",class:"",verb:"dispatched"},
+    {name:"Email",code:"EMAIL",class:"",verb:"sent"}
 
-}); 
+]); 
+
+/*app.constant('PROJECT_STATUS',[
+    {status:"Initial",code:1},
+    {status:"Trial Approved",code:2},
+    {status:"Trial Successful",code:3},
+    {status:"First Order",code:4},
+    {status:"Project Completed",code:5}
+]);*/
 
 app.config(['$routeProvider', '$locationProvider','USER_ROLES',
     function($routeProvider, $locationProvider,USER_ROLES) {
@@ -29,8 +37,7 @@ app.config(['$routeProvider', '$locationProvider','USER_ROLES',
             templateUrl: 'users.show.html',
             controller: 'UserShowController',
             data:{
-                authorizedRoles:[USER_ROLES.admin,USER_ROLES.sales],
-                restricted:true
+                authorizedRoles:[USER_ROLES.admin,USER_ROLES.sales]
             },
         }).when('/users', {
             templateUrl: 'users.index.html',
@@ -42,16 +49,16 @@ app.config(['$routeProvider', '$locationProvider','USER_ROLES',
             templateUrl: 'projects.index.html',
             controller: 'ProjectIndexController',
             data:{
-                authorizedRoles:[USER_ROLES.admin]
+                authorizedRoles:[USER_ROLES.admin,USER_ROLES.sales]
             }
         }).when('/projects/new', {
             templateUrl: 'projects.new.html',
             controller: 'ProjectNewController',
             data:{
-                authorizedRoles:[USER_ROLES.admin,USER_ROLES.sales]
+                authorizedRoles:[USER_ROLES.admin]
             }
         }).when('/projects/:projectId', {
-            templateUrl: 'projects.index.html',
+            templateUrl: 'projects.show.html',
             controller: 'ProjectShowController',
             data:{
                 authorizedRoles:[USER_ROLES.admin,USER_ROLES.sales]
@@ -72,7 +79,7 @@ app.config(['$routeProvider', '$locationProvider','USER_ROLES',
             templateUrl: 'companies.index.html',
             controller: 'CompanyIndexController',
             data:{
-                authorizedRoles:[USER_ROLES.admin]
+                authorizedRoles:[USER_ROLES.admin,USER_ROLES.sales]
             }
         }).when('/tasks/new',{
             templateUrl:'tasks.new.html',
@@ -88,13 +95,13 @@ app.config(['$routeProvider', '$locationProvider','USER_ROLES',
             }
         })
 
-        /*.when('/projects/:projectId/tasks/create',{
+        .when('/projects/:projectId/tasks/create',{
             templateUrl: 'project.tasks.create.html',
             controller: 'CreateProjectTasksController',
             data:{
-                authorizedRoles:[USER_ROLES.admin]
+                authorizedRoles:[USER_ROLES.admin,USER_ROLES.sales]
             }
-        })*/;
+        });
 
         //.otherwise({ redirectTo: '/users' });
 
@@ -110,6 +117,7 @@ app.controller('ApplicationController',['$scope','$timeout','USER_ROLES','AuthSe
 
   $scope.alerts = [];
   $scope.currentUser = null;
+  $scope.tasks = null;
   $scope.userRoles = USER_ROLES;
   $scope.isAuthorized = AuthService.isAuthorized;
  
@@ -145,6 +153,11 @@ app.controller('ApplicationController',['$scope','$timeout','USER_ROLES','AuthSe
     $scope.alerts.splice(index, 1);
   };
 
+  $scope.isAdmin=function(){
+    
+    return $scope.currentUser.role==USER_ROLES.admin
+  }
+
 }]);
 
 
@@ -158,7 +171,7 @@ app.filter("removeNA",function(){
 app.filter("rupee",function(){
     return function(input,currencySymbol){
 
-
+        if(input){
         separated=input.toString().split("").reverse();
         if(input>1000){
             i=4;
@@ -185,7 +198,10 @@ app.filter("rupee",function(){
         separated.push(" ");
         separated.push(currencySymbol);
 
+
         return separated.reverse().join("")
+        }else
+        return input;
     }
 });
 

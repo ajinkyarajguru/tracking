@@ -14,6 +14,14 @@
 	padding-left:20px;
 	padding-right:20px;
 
+	.custom-panel{
+		margin-top:20px;
+
+		.user-label{
+			margin-left:15px;
+		}
+	}
+
 	#tasks{
 		margin-top:25px;
 		overflow:hidden;
@@ -29,8 +37,17 @@
 				padding:5px 20px;
 			}
 
+			.complete-container{
+				margin:0px;
+				
+				.custom-form-control{
+					height:auto;
+					width: auto;
+					display:hidden;
+				}
+			}
 
-			.complete-container,.days-container{
+			.days-container{
 
 				margin:0px;
 				margin-bottom: 5px;
@@ -41,11 +58,6 @@
 					.custom-form-control{
 						display:none;
 					}
-				}
-
-				.custom-form-control{
-					height:auto;
-					width: auto;
 				}
 			}
 
@@ -72,6 +84,13 @@
 				background-color: #FFFFFF;
 				border-radius: 3px;
 				position:relative;
+
+				.priority{
+					.form-control{
+						height:0px;
+						width:0px;
+					}
+				}
 
 				&:last-child{
 					border-bottom:none;

@@ -7,7 +7,7 @@ class ProjectsController < Api::BaseController
       end
 
       def query_params
-        params.permit(:projected_revenue, :user_id, :company_id, :supplier_id, :start_on, :planned_end)
+        params.permit(:projected_revenue, :user_id, :company_id, :supplier_id, :start_on, :planned_end,:id)
       end
   end
 end

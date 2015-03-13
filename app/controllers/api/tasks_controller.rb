@@ -9,11 +9,11 @@ module Api
 		private
 
 	      def task_params
-	        params.require(:task).permit(:id,:category, :priority, :deadline,:user_id,:company_id,:description,:completed)
+	        params.require(:task).permit(:id,:category, :priority, :deadline,:user_id,:company_id,:description,:completed,:project_id)
 	      end
 
 	      def query_params
-	        params.permit(:id, :category, :priority, :deadline, :user_id,:company_id,:completed)
+	        params.permit(:id, :category, :priority, :deadline, :user_id,:company_id,:completed,:project_id)
 	      end
 	end
 end

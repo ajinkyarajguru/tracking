@@ -1,4 +1,4 @@
-UserControllers = angular.module('UserControllers',[]);
+UserControllers = angular.module('UserControllers',['ngResource']);
 
 UserControllers.factory('User', function($resource) {
     return $resource('/api/users/:userId');
@@ -37,6 +37,15 @@ UserControllers.controller("UserShowController", ['$scope', '$routeParams', 'Use
                 
                 Project.update({projectId:project_id},updateProject);
             });
+
+            /*var updatedProject=$scope.projects.map(function(project){
+                if(project.project_id===project_id){
+                    return project
+                }
+            });
+
+            updatedProject.progress=progress;
+*/
 
             angular.forEach($scope.projects,function(project,index){
                 if(project.project_id===project_id){

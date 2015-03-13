@@ -1,1 +1,20 @@
-<h3>Projects</h3>
+<h3 class="users-header text-center col-md-6 col-md-offset-3 form-label" style="margin-bottom:40px">List Projects</h3>
+
+<input ng-model="search.name" type="search" class="col-md-3 form-control custom-form-control" style="margin-top:20px; width:auto"/>
+<section class="users" ng-if="projects">
+  
+  <ul class="list-unstyled">
+    <li ng-repeat="project in projects|filter:search">
+      <section class="well well-sm col-md-12">
+        <h4 class="h4 col-md-5 user-field"><a class="user-name" ng-href="./projects/{{project.id}}">{{project.company}} {{project.supplier}}</a></h4>
+        <h5 class="h5 col-md-2 user-active"><span class="pull-left"><a ng-href="./projects/{{project.id}}/tasks/create">+ Add Task</a></span></h5>
+        
+        <h5 class="h5 col-md-2 user-active"><span class="pull-right"></span></h5>
+        <div class="col-md-2 col-md-offset-1 text-right custom-buttons">
+          
+          <a ng-href=".{{project.delete_url}}" class="btn btn-danger btn-sm" data-method="delete">Delete</a>
+        </div>
+      </section>
+    </li>
+  </ul>
+</section>
