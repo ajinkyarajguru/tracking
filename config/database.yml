@@ -10,9 +10,8 @@ default: &default
   timeout: 5000
 
 prod: &prod
-  adapter: sqlite3
-  pool: 5
-  timeout: 5000
+  adapter: postgresql
+  prepared_statements: false
 
 development:
   <<: *default

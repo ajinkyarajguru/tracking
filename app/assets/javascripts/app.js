@@ -95,7 +95,7 @@ app.config(['$routeProvider', '$locationProvider','USER_ROLES',
             }
         })
 
-        .when('/projects/:projectId/tasks/create',{
+        .when('/projects/:projectId/tasks',{
             templateUrl: 'project.tasks.create.html',
             controller: 'CreateProjectTasksController',
             data:{
@@ -208,7 +208,7 @@ app.filter("rupee",function(){
 app.run(function ($rootScope, $location, $cookies, Session,USER_ROLES,AUTH_EVENTS, AuthService) {
 
   setTimeout(function(){
-    $(".application-container").height($(window).innerHeight());
+    $(".application-container").css('min-height',$(window).innerHeight());
   },100)
   
   $rootScope.$on('$routeChangeStart', function (event, next) {

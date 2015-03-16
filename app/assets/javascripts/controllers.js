@@ -1,4 +1,4 @@
-controllers = angular.module('controllers', ['UserControllers','uiSwitch']).factory('User', function($resource) {
+controllers = angular.module('controllers', ['UserControllers','ProjectControllers','SupplierControllers','CompanyControllers','uiSwitch']).factory('User', function($resource) {
     return $resource('/api/users/:userId');
 }).factory('Project', function($resource) {
     return $resource('/api/projects/:projectId',null,{
@@ -15,6 +15,13 @@ controllers = angular.module('controllers', ['UserControllers','uiSwitch']).fact
     });
 });
 
+/*controllers.service('AlertService',['ngResource',function($resource){
+    controllers.constant('AlertMessages',{
+        taskCreated:"Task Created",
+        taskNotCreated:"Failed to Create Task"
+    });
+}]);
+*/
 /*controllers.service('UserService',['ngResource',function($resource){
     return $resource('/api/users/:userId', null, {
 
@@ -71,6 +78,9 @@ controllers.controller('TaskPanelController', ['$scope','$rootScope','$filter','
 
     $scope.toggleTaskCompleted=function(task){
         task.completed=task.completed;
+        if(task.completed){
+            task.completed_on=new Date();
+        }
         Task.update({taskId:task.id},task);
     }
 
@@ -124,54 +134,10 @@ controllers.controller('TaskPanelController', ['$scope','$rootScope','$filter','
 }]);
 
 
-controllers.controller('CreateProjectTasksController', ['$scope','$routeParams','Task','TASK_CATEGORIES','Project',
- function ($scope, $routeParams,Task,TASK_CATEGORIES,Project) {
-    
-    $scope.categories=TASK_CATEGORIES;
-
-    $scope.id = $routeParams.projectId
 
 
-    Project.get({projectId:$scope.id}).$promise.then(function(result){
-        $scope.projectInformation=result;
-        console.log($scope.projectInformation)
-    });
 
-
-    $scope.addTask=function(task){
-
-        newTask = new Task();
-        newTask.project_id=$scope.projectInformation.id;
-        newTask.user_id = $scope.projectInformation.user.id;
-        newTask.category = task.category.code;
-        newTask.company_id = $scope.projectInformation.company.id;
-        newTask.priority = task.priority;
-        newTask.deadline = task.deadline;
-        newTask.description = task.description;
-
-        newTask.$save(function(result) {
-                
-        });
-    }
-
-    
-    $('.datepicker').datepicker({
-        format:'yyyy-mm-dd',
-        autoclose:true
-    });
-
-    setTimeout(function(){$(".selectpicker").selectpicker();});
-
-}]);
-
-controllers.controller('CompanyIndexController', ['$scope','Company', function($scope,Company){
-    Company.query().$promise.then(function(result){
-        $scope.companies=result;
-    });
-}]);
-
-
-controllers.controller('ProjectShowController', ['$scope','$routeParams','Project','User','TASK_CATEGORIES', function($scope,$routeParams,Project,User,TASK_CATEGORIES){
+/*controllers.controller('ProjectShowController', ['$scope','$routeParams','Project','User','TASK_CATEGORIES', function($scope,$routeParams,Project,User,TASK_CATEGORIES){
     
     var findCategory=function(selectedCategory){
          return TASK_CATEGORIES.filter(function(category){
@@ -190,7 +156,6 @@ controllers.controller('ProjectShowController', ['$scope','$routeParams','Projec
 
         $scope.project=result
 
-        console.log($scope.project)
     });
 
     
@@ -210,24 +175,7 @@ controllers.controller('ProjectShowController', ['$scope','$routeParams','Projec
         };
 
 }]);
-
-controllers.controller('ProjectIndexController', ['$scope','Project','User','USER_ROLES', function($scope,Project,User,USER_ROLES){
-
-     
-    if($scope.isAdmin()){
-
-        Project.query().$promise.then(function(result){
-            $scope.projects=result;
-        });        
-    }else{
-        var userId=$scope.currentUser.id
-
-        Project.query({user_id:userId}).$promise.then(function(result){
-            $scope.projects=result;
-        });
-    }
-    
-}]);
+*/
 
 
 
@@ -236,7 +184,7 @@ controllers.controller('TaskNewController', ['$scope','$timeout','Task','Company
     $scope.categories=TASK_CATEGORIES;
 
     $scope.addTask = function(task) {
-            console.log(task)
+            
             newTask = new Task();
             newTask.user_id = task.user.id;
             newTask.category = task.category.code;
@@ -244,15 +192,17 @@ controllers.controller('TaskNewController', ['$scope','$timeout','Task','Company
             newTask.priority = task.priority;
             newTask.deadline = task.deadline;
             newTask.description = task.description;
-            $.extend($scope.tasks,newTask);
+            
 
-            console.log($scope.tasks);
+            
             
             newTask.$save(function(result) {
+                $scope.addTimedAlert("Task Created","success",3000);
 
-
-                
+                },function(error){
+                    $scope.addTimedAlert("Task Created","success",3000);
             });
+
         };
     
     Company.query().$promise.then(function(companies) {
@@ -282,98 +232,10 @@ controllers.controller('TaskNewController', ['$scope','$timeout','Task','Company
 
 
 
-controllers.controller('ProjectNewController', ['$scope', '$location','$timeout', 'User', 'Company', 'Supplier', 'Project',
-    function($scope, $location, $timeout, User, Company, Supplier, Project) {
 
-        $scope.addProject = function(project) {
-            
-            newProject = new Project();
-            newProject.user_id = project.user.id;
-            newProject.supplier_id = project.supplier.id;
-            newProject.company_id = project.company.id;
-            newProject.projected_revenue = project.projected_revenue;
-            newProject.start_on = project.start_on;
-            newProject.planned_end = project.planned_end;
-            
-            newProject.$save(function(result) {
-            
-                    $location.path("/projects/"+result.id+"/tasks/create");
-                
-            });
-        };
 
-        User.query().$promise.then(function(users) {
-            $scope.users = users;
-       
-            $timeout(function(){
-                $(".selectpicker").selectpicker('refresh');
-            });
-        });
 
-        Supplier.query().$promise.then(function(suppliers) {
-            $scope.suppliers = suppliers;
-       
-            $timeout(function(){
-                $(".selectpicker").selectpicker('refresh');
-            });
-        });
 
-        Company.query().$promise.then(function(companies) {
-            $scope.companies = companies;
-            $timeout(function(){
-                $(".selectpicker").selectpicker('refresh');
-            });
-        });
-
-        $('.datepicker').datepicker({
-            format: 'yyyy-mm-dd',
-            autoclose: true
-        });
-
-        $(".selectpicker").selectpicker();
-
-    }
-]);
-
-controllers.controller('SupplierNewController', ['$scope', 'Supplier',
-    function($scope, Supplier) {
-
-        $scope.master = {};
-
-        $scope.supplier = {};
-
-        $scope.update = function(supplier) {
-            newSupplier = new Supplier();
-            newSupplier.supplier = supplier;
-            newSupplier.$save(function(result) {});
-        };
-
-        $scope.reset = function() {
-            $scope.supplier = $scope.master;
-        };
-
-    }
-]);
-
-controllers.controller('CompanyNewController', ['$scope', 'Company',
-    function($scope, Company) {
-
-        $scope.master = {};
-
-        $scope.company = {};
-
-        $scope.update = function(company) {
-            newCompany = new Company();
-            newCompany.company = company;
-            newCompany.$save(function(result) {});
-        };
-
-        $scope.reset = function() {
-            $scope.company = $scope.master;
-        };
-
-    }
-]);
 
 controllers.run(function(){
     $("#task-list").height($(window).innerHeight()-250);     

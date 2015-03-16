@@ -1,20 +1,56 @@
-<h3 class="users-header text-center col-md-6 col-md-offset-3 form-label" style="margin-bottom:40px">List Projects</h3>
-
+<h3 class="text-center col-md-6 col-md-offset-3 form-label">Projects</h3>
 <input ng-model="search.name" type="search" class="col-md-3 form-control custom-form-control" style="margin-top:20px; width:auto"/>
-<section class="users" ng-if="projects">
-  
-  <ul class="list-unstyled">
-    <li ng-repeat="project in projects|filter:search">
-      <section class="well well-sm col-md-12">
-        <h4 class="h4 col-md-5 user-field"><a class="user-name" ng-href="./projects/{{project.id}}">{{project.company}} {{project.supplier}}</a></h4>
-        <h5 class="h5 col-md-2 user-active"><span class="pull-left"><a ng-href="./projects/{{project.id}}/tasks/create">+ Add Task</a></span></h5>
-        
-        <h5 class="h5 col-md-2 user-active"><span class="pull-right"></span></h5>
-        <div class="col-md-2 col-md-offset-1 text-right custom-buttons">
-          
-          <a ng-href=".{{project.delete_url}}" class="btn btn-danger btn-sm" data-method="delete">Delete</a>
-        </div>
-      </section>
-    </li>
-  </ul>
-</section>
+<div class="col-md-12 panel custom-panel">
+  <div ng-repeat="project in projects|filter:search.name">
+  <div class="row">
+    <section class="col-md-6">
+      <h4 class="text-muted col-md-3 small label label-default user-label">{{project.user.name}}</h4>
+    </section>
+    
+  </div>
+  <div class="row">
+    <section class="col-md-6">
+      <h4 class="h4 col-md-6" style="margin-top: 0; padding-top:8px"><a ng-href="/projects/{{project.id}}">{{project.company.name}} {{project.supplier.name}}</a></h4>
+      <h4 class="h4 col-md-6 text-right" style="margin-top: 0; padding-top:8px">{{project.daystogo}} days</h4>
+      
+      <h5 class="h5 col-md-4"><a ng-href="projects/{{project.id}}/tasks/">+ Add Task</a></h5>
+      <h3 class="h3 col-md-8 text-right" style="margin-top: 0; padding-top:8px">{{project.projected_revenue|removeNA : 0 : ""|rupee:"&#8377;"}}</h3>
+    <h5 class="h5 col-md-11 text-center" style="margin-top: 0; padding-top:5px"><progressbar class="active custom-progress" value="project.progress" max="5" type="getType(project.progress)"><i>{{project.progress}}</i></progressbar></h5>
+    
+    <div class="btn-group col-md-1  text-right">
+      <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+      <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#" ng-click="updateProgress(1,project.id);">Initial</a></li>
+        <li><a href="#" ng-click="updateProgress(2,project.id);">Trial Approved</a></li>
+        <li><a href="#" ng-click="updateProgress(3,project.id);">Trial Sucessful</a></li>
+        <li><a href="#" ng-click="updateProgress(4,project.id);">First Order</a></li>
+        <li><a href="#" ng-click="updateProgress(5,project.id);">Project Complete</a></li>
+        <li class="divider"></li>
+        <li><a ng-href="./{{row.delete_project_url}}" data-method="delete" class="btn btn-danger" style="margin:10px">Remove</a></li>
+      </ul>
+    </div>
+  </section>
+  <section class="col-md-6">
+    <ul class="list-unstyled">
+      <li ng-repeat="task in project.tasks">
+        <p ng-if="!task.completed">
+          <strong class="text-primary">{{task.category.name}}</strong><span> for </span><strong>{{task.description}} </strong><span>scheduled on </span>
+          <span class="small text-muted">{{task.deadline}}</span>
+        </p>
+      </li>
+    </ul>
+    <strong class="">History:</strong>
+    <ul class="list-unstyled">
+      <li ng-repeat="task in project.tasks">
+        <p ng-if="task.completed">
+          <strong class="text-primary">{{task.category.name}}</strong><span> for </span><strong>{{task.description}} </strong><span class="text-success">{{task.category.verb}} on </span>
+          <span class="small text-muted">{{task.completed_on|date:'yyyy-mm-dd'}}</span>
+        </p>
+      </li>
+    </ul>
+  </section>
+</div>
+</div>
+</div>

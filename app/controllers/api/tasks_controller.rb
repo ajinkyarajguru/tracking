@@ -1,7 +1,6 @@
 module Api
 	class TasksController < Api::BaseController
 		
-
 		def userTasks
 			@userTasks=Task.where("user_id=?",params[:id])
 		end
@@ -9,7 +8,7 @@ module Api
 		private
 
 	      def task_params
-	        params.require(:task).permit(:id,:category, :priority, :deadline,:user_id,:company_id,:description,:completed,:project_id)
+	        params.require(:task).permit(:id,:category, :priority, :deadline,:user_id,:company_id,:description,:completed,:project_id,:completed_on)
 	      end
 
 	      def query_params
