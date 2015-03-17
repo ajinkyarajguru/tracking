@@ -10,7 +10,9 @@ SupplierControllers.controller('SupplierNewController', ['$scope', 'Supplier',
         $scope.update = function(supplier) {
             newSupplier = new Supplier();
             newSupplier.supplier = supplier;
-            newSupplier.$save(function(result) {});
+            newSupplier.$save(function(result) {
+                console.log(result)
+            });
         };
 
         $scope.reset = function() {

@@ -1,6 +1,6 @@
 <h3 class="text-center col-md-6 col-md-offset-3 form-label">Projects</h3>
 <input ng-model="search.name" type="search" class="col-md-3 form-control custom-form-control" style="margin-top:20px; width:auto"/>
-<div class="col-md-12 panel custom-panel">
+<div class="col-md-12 panel custom-panel" ng-if="projects">
   <div ng-repeat="project in projects|filter:search.name">
   <div class="row">
     <section class="col-md-6">
@@ -37,16 +37,16 @@
       <li ng-repeat="task in project.tasks">
         <p ng-if="!task.completed">
           <strong class="text-primary">{{task.category.name}}</strong><span> for </span><strong>{{task.description}} </strong><span>scheduled on </span>
-          <span class="small text-muted">{{task.deadline}}</span>
+          <span class="small text-muted">{{task.deadline|date:'d-MMM-yyyy'}}</span>
         </p>
       </li>
     </ul>
-    <strong class="">History:</strong>
+    <strong class="text-center label">History</strong>
     <ul class="list-unstyled">
       <li ng-repeat="task in project.tasks">
         <p ng-if="task.completed">
           <strong class="text-primary">{{task.category.name}}</strong><span> for </span><strong>{{task.description}} </strong><span class="text-success">{{task.category.verb}} on </span>
-          <span class="small text-muted">{{task.completed_on'}}</span>
+          <span class="small text-muted">{{task.completed_on|date:'d-MMM-yyyy'}}</span>
         </p>
       </li>
     </ul>

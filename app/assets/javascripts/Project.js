@@ -23,6 +23,7 @@ ProjectControllers.controller('ProjectShowController', ['$scope', '$routeParams'
 
     });
 
+
     $scope.updateProgress = function(progress, project_id) {
 
         Project.get({
@@ -56,7 +57,6 @@ ProjectControllers.controller('CreateProjectTasksController', ['$scope', '$route
             projectId: $scope.id
         }).$promise.then(function(result) {
             $scope.projectInformation = result;
-            console.log($scope.projectInformation)
         });
 
 
@@ -117,8 +117,7 @@ ProjectControllers.controller('ProjectIndexController', ['$scope', 'Project', 'U
         });
 
         angular.forEach($scope.projects, function(project, index) {
-            console.log(project)
-            if (project.project_id === project_id) {
+            if (project.id == project_id) {
                 $scope.projects[index].progress = progress;
             }
         });
@@ -134,7 +133,7 @@ ProjectControllers.controller('ProjectIndexController', ['$scope', 'Project', 'U
                     task.category = findCategory(task.category);
                 });
             }
-            console.log(result)
+            
             $scope.projects = result;
         });
     } else {
@@ -149,7 +148,6 @@ ProjectControllers.controller('ProjectIndexController', ['$scope', 'Project', 'U
                     task.category = findCategory(task.category);
                 });
             }
-            console.log(result)
             $scope.projects = result;
         });
     }

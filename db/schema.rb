@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150316101034) do
+ActiveRecord::Schema.define(version: 20150316180725) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 20150316101034) do
     t.string   "email"
     t.string   "role",            default: "sales"
     t.string   "password_digest"
+    t.string   "remember_digest"
   end
 
 end

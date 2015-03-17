@@ -222,15 +222,12 @@ app.run(function ($rootScope, $location, $cookies, Session,USER_ROLES,AUTH_EVENT
         if(Session.userRole==USER_ROLES.sales){
             userAuthorized = isRestricted ? (next.pathParams.userId==Session.userId) : true;
         }*/
-
-
-
+        
         if (!AuthService.isAuthorized(authorizedRoles)) {
           event.preventDefault();
           if (AuthService.isAuthenticated()) {                
             $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
-          } else {
-            
+          } else {            
             $location.path("/login")
             $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
           }

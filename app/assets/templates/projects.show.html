@@ -37,7 +37,7 @@
       <li ng-repeat="task in project.tasks">
         <p ng-if="!task.completed">
           <strong class="text-primary">{{task.category.name}}</strong><span> for </span><strong>{{task.description}} </strong><span>scheduled on </span>
-          <span class="small text-muted">{{task.deadline}}</span>
+          <span class="small text-muted">{{task.deadline|date:'d-MMM-yyyy'}}</span>
         </p>
       </li>
     </ul>
@@ -45,7 +45,7 @@
       <li ng-repeat="task in project.tasks">
         <p ng-if="task.completed">
           <strong class="text-primary">{{task.category.name}}</strong><span> for </span><strong>{{task.description}} </strong><span class="text-success">{{task.category.verb}} on </span>
-          <span class="small text-muted">{{task.updated_at|date:'yyyy-mm-dd'}}</span>
+          <span class="small text-muted">{{task.updated_at|date:'d-MMM-yyyy'}}</span>
         </p>
       </li>
     </ul>
