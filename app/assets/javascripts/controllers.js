@@ -69,7 +69,7 @@ controllers.service('SupplierService',['ngResource',function($resource){
 */
 
 
-controllers.controller('TaskPanelController', ['$scope','$rootScope','$filter','Task','TASK_CATEGORIES', function($scope,$rootScope,$filter,Task,TASK_CATEGORIES){
+controllers.controller('TaskPanelController', ['$scope','$rootScope','$filter','Task','USER_ROLES','Session','User','TASK_CATEGORIES', function($scope,$rootScope,$filter,Task,USER_ROLES,Session,User,TASK_CATEGORIES){
 
     $scope.toggleTaskPriority=function(task){
         task.priority=!task.priority;
@@ -87,10 +87,21 @@ controllers.controller('TaskPanelController', ['$scope','$rootScope','$filter','
     var orderBy = $filter('orderBy');
 
     $rootScope.$on("auth-login-success",function(){
-        Task.get({user_id:$scope.currentUser.id,completed:'f'}).$promise.then(function(result){
-            $scope.tasks=result;            
+
+        $scope.userRoles= USER_ROLES;
+
+/*        User.query({user_id:Session.user_id}).$promise.then(function(result){
+            $scope.setCurrentUser(result);
+
+            console.log($scope.currentUser)
+
+*/            Task.get({user_id:$scope.currentUser.id,completed:'f'}).$promise.then(function(result){
+                $scope.tasks=result;            
+            });
+
         });
-    });
+
+/*    });*/
 
     $('.datepicker').datepicker({
        format: 'yyyy-mm-dd',
@@ -132,51 +143,6 @@ controllers.controller('TaskPanelController', ['$scope','$rootScope','$filter','
 
     
 }]);
-
-
-
-
-
-/*controllers.controller('ProjectShowController', ['$scope','$routeParams','Project','User','TASK_CATEGORIES', function($scope,$routeParams,Project,User,TASK_CATEGORIES){
-    
-    var findCategory=function(selectedCategory){
-         return TASK_CATEGORIES.filter(function(category){
-            return category.code==selectedCategory
-                
-            })[0];
-        
-    }
-
-
-    Project.get({projectId:$routeParams.projectId}).$promise.then(function(result){
-
-        angular.forEach(result.tasks,function(task,index){
-            task.category=findCategory(task.category);
-        });
-
-        $scope.project=result
-
-    });
-
-    
-    $scope.updateProgress=function(progress,project_id){
-
-            Project.get({projectId:project_id},function(updateProject){
-                updateProject.progress=progress;
-                            
-                if(progress===5){
-                    updateProject.completed_on=new Date();
-                }
-                
-                Project.update({projectId:project_id},updateProject);
-            });
-
-            $scope.project.progress=progress;
-        };
-
-}]);
-*/
-
 
 
 controllers.controller('TaskNewController', ['$scope','$timeout','Task','Company','User','TASK_CATEGORIES', function($scope,$timeout,Task,Company,User,TASK_CATEGORIES){

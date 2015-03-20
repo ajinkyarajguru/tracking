@@ -14,11 +14,9 @@ group :development, :testing do
 end
 
 group :production do
-  
+  gem 'mysql2'
   gem 'rails_12factor'
-  gem 'pg'
-  gem 'puma'
-  
+  gem 'capistrano-rails'
 end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'

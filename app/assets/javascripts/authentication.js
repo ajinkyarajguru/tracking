@@ -103,5 +103,11 @@ authentication.service('Session', function () {
     this.userRole = null;
   };
 
+  this.set=function(session){
+    this.id=session.id;
+    this.userId=session.userId;
+    this.userRole=session.userRole;
+  }
+
   return this;
 })

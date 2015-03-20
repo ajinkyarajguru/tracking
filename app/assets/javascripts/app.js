@@ -205,13 +205,23 @@ app.filter("rupee",function(){
     }
 });
 
-app.run(function ($rootScope, $location, $cookies, Session,USER_ROLES,AUTH_EVENTS, AuthService) {
+app.run(function ($rootScope, $location, $cookies, Session, USER_ROLES,AUTH_EVENTS, AuthService) {
+
+  $rootScope.$on("auth-login-success",function(){
+    $cookies["user"]=JSON.stringify(Session);        
+  });
 
   setTimeout(function(){
     $(".application-container").css('min-height',$(window).innerHeight());
   },100)
   
   $rootScope.$on('$routeChangeStart', function (event, next) {
+
+/*    if(Session.id==null){
+      session=JSON.parse($cookies["user"]);
+      Session.set(session)
+    }
+*/     
      if(next.templateUrl!="login.html"){
         var authorizedRoles = next.data.authorizedRoles;
        
@@ -221,8 +231,7 @@ app.run(function ($rootScope, $location, $cookies, Session,USER_ROLES,AUTH_EVENT
         
         if(Session.userRole==USER_ROLES.sales){
             userAuthorized = isRestricted ? (next.pathParams.userId==Session.userId) : true;
-        }*/
-        
+        }*/        
         if (!AuthService.isAuthorized(authorizedRoles)) {
           event.preventDefault();
           if (AuthService.isAuthenticated()) {                
@@ -231,6 +240,8 @@ app.run(function ($rootScope, $location, $cookies, Session,USER_ROLES,AUTH_EVENT
             $location.path("/login")
             $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
           }
+        }else{
+            $rootScope.$broadcast(AUTH_EVENTS.loginSuccess)
         }
      }
   });
