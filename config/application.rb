@@ -22,11 +22,11 @@ module Tracking
     
     #config.force_ssl = true
 
-    config.assets.paths << Rails.root.join("vendor","assets","bower_components")
-    config.assets.paths << Rails.root.join("vendor","assets","bower_components","bootstrap-sass","assets","fonts")
+#    config.assets.paths << Rails.root.join("vendor","assets","bower_components")
+ #   config.assets.paths << Rails.root.join("vendor","assets","bower_components","bootstrap-sass","assets","fonts")
 
-    config.assets.precompile << %r(.*.(?:eot|svg|ttf|woff)$)
-    config.assets.paths << Rails.root.join("vendor","assets","bower_components","bootstrap-sass","assets","fonts")
+  #  config.assets.precompile << %r(.*.(?:eot|svg|ttf|woff)$)
+   # config.assets.paths << Rails.root.join("vendor","assets","bower_components","bootstrap-sass","assets","fonts")
 
   end
 end

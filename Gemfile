@@ -8,15 +8,12 @@ gem 'rails', '4.1.0'
 
 gem 'bcrypt'
 
+
+gem 'sqlite3'
 # Use postgresql as the database for Active Record
-group :development, :testing do
-	gem 'sqlite3'
-end
 
 group :production do
-  gem 'mysql2'
   gem 'rails_12factor'
-  gem 'capistrano-rails'
 end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
@@ -37,6 +34,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
+
+gem 'puma'
 
 gem 'bower-rails'
 
